@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GB_ServerManager.Views"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Servers">
@@ -20,12 +21,14 @@
                 <Label Content="Server Path:" />
                 <Label Content="Server Port:" />
                 <Label Content="Query Port:" />
+                <Label Content="Restart Time:" />
             </StackPanel>
             <StackPanel Orientation="Vertical">
                 <TextBox x:Name="tbxSrvrName" Width="200" Margin="0,4,0,4"/>
                 <TextBox x:Name="tbxSrvrPath" Width="200" Margin="0,4,0,4"/>
                 <TextBox x:Name="tbxServerPort" Width="20" Margin="0,4,0,4" HorizontalAlignment="Left"/>
                 <TextBox x:Name="tbxQueryPort" Width="20" Margin="0,4,0,4" HorizontalAlignment="Left"/>
+                <xctk:IntegerUpDown x:Name="tbxRestartTime" Width="60" Height="30" Maximum="24" Minimum="0" DefaultValue="12" HorizontalAlignment="Left"/>
             </StackPanel>
         </StackPanel>
     </Grid>

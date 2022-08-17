@@ -5,20 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GB_ServerManager"
         mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Padding="0"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <Grid Background="DarkOliveGreen">
-            <StackPanel>
-                <Button x:Name="btnHome" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="Transparent" Padding="0,5,0,5">&#xEA8A;</Button>
-                <Button x:Name="btnServer" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="Transparent" Padding="0,5,0,5">&#xE12B;</Button>
-            </StackPanel>
+        <Grid Background="#6D712E" MouseDown="dragWindow">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="75" />
+                <ColumnDefinition Width="75" />
+                <ColumnDefinition Width="75" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="25" />
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Ground Branch Server Manager" FontWeight="Bold"/>
+            <Button x:Name="btnHome" FontSize="12" Background="Transparent" Grid.Column="1" Click="btnHome_Click">Home</Button>
+            <Button x:Name="btnServer" FontSize="12" Background="Transparent" Grid.Column="2" Click="btnServer_Click">Servers</Button>
+            <Button x:Name="btnSettings" FontSize="12" Background="Transparent" Grid.Column="3" Click="btnSettings_Click">Settings</Button>
+            <Button x:Name="btnClose" FontSize="14" FontFamily="Segoe MDL2 Assets" Grid.Column="5" Foreground="DarkRed"
+                    Click="btnClose_Click">&#xEF2C;
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" SpreadMethod="Repeat">
+                        <GradientStop Offset="0" Color="Yellow"/>
+                        <GradientStop Offset="0.5" Color="Yellow"/>
+                        <GradientStop Offset="0.5" Color="Black"/>
+                        <GradientStop Offset="1" Color="Black" />
+
+                        <LinearGradientBrush.RelativeTransform>
+                            <ScaleTransform ScaleX=".08" ScaleY=".08" />
+                        </LinearGradientBrush.RelativeTransform>
+                    </LinearGradientBrush>                    
+                </Button.Background>
+            </Button>
         </Grid>
-        <Frame x:Name="frame" Grid.Column="1">
+        <Frame x:Name="frame" Grid.Row="1">
             
         </Frame>
     </Grid>

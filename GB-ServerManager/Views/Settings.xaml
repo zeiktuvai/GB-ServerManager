@@ -1,0 +1,53 @@
+﻿<Page x:Class="GB_ServerManager.Views.Settings"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GB_ServerManager.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Settings">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Background="#555346" Height="35" VerticalAlignment="Top">
+            <Label Content="Settings" HorizontalAlignment="Center" FontSize="18" Height="35" VerticalAlignment="Top"/>
+            <Button x:Name="bttnSaveSttngs" Width="30" Height="32" Margin="1,1,1,1" HorizontalAlignment="Right" Background="Transparent" 
+                        FontSize="18" FontFamily="Segoe MDL2 Assets" BorderBrush="Black" BorderThickness=".5" Click="bttnSaveSttngs_Click">
+                &#xE105;
+            </Button>
+        </Grid>
+
+        <StackPanel Margin="0,35,0,0">
+            <Label Content="Steam Command Path" FontSize="14" HorizontalAlignment="Center"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="50" />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="tbxStmCmdPath" HorizontalAlignment="Stretch" Margin="40,0,0,0" />
+                <Button x:Name="bttnOpenSteamCmd" Grid.Column="1" Width="20" Background="Transparent" BorderBrush="Black" BorderThickness=".5" 
+                            FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" Click="bttnOpenSteamCmd_Click">&#xE197;</Button>
+            </Grid>
+
+            <Label Content="Server Base Path" FontSize="14" HorizontalAlignment="Center"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="50" />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="tbxBaseSrvrPath" HorizontalAlignment="Stretch" Margin="40,0,0,0" />
+                <Button x:Name="bttnOpenServerPath" Grid.Column="1" Width="20" Background="Transparent" BorderBrush="Black" BorderThickness=".5" 
+                            FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" Click="bttnOpenServerPath_Click">&#xE197;</Button>
+            </Grid>
+        </StackPanel>
+
+        <Grid Background="#746B5A" Height="35" VerticalAlignment="Top" Grid.Column="1">
+            <Label Content="Server Status" HorizontalAlignment="Center" FontSize="18" Height="35" VerticalAlignment="Top"/>
+        </Grid>
+    </Grid>
+</Page>
