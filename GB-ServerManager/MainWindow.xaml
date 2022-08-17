@@ -9,28 +9,35 @@
         ResizeMode="NoResize"
         Padding="0"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Window.Resources>
+        <Style x:Key="MenuButton" TargetType="Button">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Width" Value="95" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Margin" Value="-5,0,0,0" />
+            <Setter Property="Padding" Value="5,0,0,0" />
+        </Style>
+    </Window.Resources>
+    
+    <Grid Background="#555346">
         <Grid.RowDefinitions>
-            <RowDefinition Height="25" />
+            <RowDefinition Height="35" />
             <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        </Grid.RowDefinitions>        
 
-        <Grid Background="#6D712E" MouseDown="dragWindow">
+        <Grid MouseDown="dragWindow">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" />
-                <ColumnDefinition Width="75" />
-                <ColumnDefinition Width="75" />
-                <ColumnDefinition Width="75" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="25" />
             </Grid.ColumnDefinitions>
-
+            
             <Label Content="Ground Branch Server Manager" FontWeight="Bold"/>
-            <Button x:Name="btnHome" FontSize="12" Background="Transparent" Grid.Column="1" Click="btnHome_Click">Home</Button>
-            <Button x:Name="btnServer" FontSize="12" Background="Transparent" Grid.Column="2" Click="btnServer_Click">Servers</Button>
-            <Button x:Name="btnSettings" FontSize="12" Background="Transparent" Grid.Column="3" Click="btnSettings_Click">Settings</Button>
-            <Button x:Name="btnClose" FontSize="14" FontFamily="Segoe MDL2 Assets" Grid.Column="5" Foreground="DarkRed"
-                    Click="btnClose_Click">&#xEF2C;
+            
+            <Button x:Name="btnClose" FontSize="14" FontFamily="Segoe MDL2 Assets" Grid.Column="1" Foreground="DarkRed"
+                    Click="btnClose_Click" Height="25" VerticalAlignment="Top">&#xEF2C;
                 <Button.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" SpreadMethod="Repeat">
                         <GradientStop Offset="0" Color="Yellow"/>
@@ -45,8 +52,19 @@
                 </Button.Background>
             </Button>
         </Grid>
-        <Frame x:Name="frame" Grid.Row="1">
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <Button x:Name="btnHome" Style="{StaticResource MenuButton}" Click="btnHome_Click">Home</Button>
+                <Button x:Name="btnServer" Style="{StaticResource MenuButton}" Click="btnServer_Click">Servers</Button>
+                <Button x:Name="btnSettings" Style="{StaticResource MenuButton}" Click="btnSettings_Click">Settings</Button>
+            </StackPanel>
             
-        </Frame>
+        <Frame x:Name="frame" Grid.Row="1" Grid.Column="1" />            
+        </Grid>
     </Grid>
 </Window>

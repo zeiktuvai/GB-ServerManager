@@ -22,6 +22,11 @@ namespace GB_ServerManager.Views
             {
                 tbxBaseSrvrPath.Text = settings.ServerBasePath;
                 tbxStmCmdPath.Text = settings.SteamCMDPath;
+            } 
+            else
+            {
+                lblSBPError.Visibility = string.IsNullOrEmpty(tbxBaseSrvrPath.Text) ? Visibility.Visible : Visibility.Hidden;
+                lblSCPError.Visibility = string.IsNullOrEmpty(tbxStmCmdPath.Text) ? Visibility.Visible : Visibility.Hidden;
             }
         }
 

@@ -8,13 +8,10 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Settings">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <Grid Background="#555346">
 
-        <Grid Background="#555346" Height="35" VerticalAlignment="Top">
+
+        <Grid  Height="35" VerticalAlignment="Top">
             <Label Content="Settings" HorizontalAlignment="Center" FontSize="18" Height="35" VerticalAlignment="Top"/>
             <Button x:Name="bttnSaveSttngs" Width="30" Height="32" Margin="1,1,1,1" HorizontalAlignment="Right" Background="Transparent" 
                         FontSize="18" FontFamily="Segoe MDL2 Assets" BorderBrush="Black" BorderThickness=".5" Click="bttnSaveSttngs_Click">
@@ -29,6 +26,13 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="50" />
                 </Grid.ColumnDefinitions>
+
+                <Label Name="lblSCPError" Visibility="Hidden" Content="&#xE783;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" Margin="20,0,0,0" Foreground="red">
+                    <Label.ToolTip>
+                        <ToolTip Content="Please set the SteamCMD path" />
+                    </Label.ToolTip>
+                </Label>
+
                 <TextBox x:Name="tbxStmCmdPath" HorizontalAlignment="Stretch" Margin="40,0,0,0" />
                 <Button x:Name="bttnOpenSteamCmd" Grid.Column="1" Width="20" Background="Transparent" BorderBrush="Black" BorderThickness=".5" 
                             FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" Click="bttnOpenSteamCmd_Click">&#xE197;</Button>
@@ -40,14 +44,16 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="50" />
                 </Grid.ColumnDefinitions>
+
+                <Label Name="lblSBPError" Visibility="Hidden" Content="&#xE783;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" Margin="20,0,0,0" Foreground="red">
+                    <Label.ToolTip>
+                        <ToolTip Content="Please set the Server base path" />
+                    </Label.ToolTip>
+                </Label>
                 <TextBox x:Name="tbxBaseSrvrPath" HorizontalAlignment="Stretch" Margin="40,0,0,0" />
                 <Button x:Name="bttnOpenServerPath" Grid.Column="1" Width="20" Background="Transparent" BorderBrush="Black" BorderThickness=".5" 
                             FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" Click="bttnOpenServerPath_Click">&#xE197;</Button>
             </Grid>
         </StackPanel>
-
-        <Grid Background="#746B5A" Height="35" VerticalAlignment="Top" Grid.Column="1">
-            <Label Content="Server Status" HorizontalAlignment="Center" FontSize="18" Height="35" VerticalAlignment="Top"/>
-        </Grid>
     </Grid>
 </Page>

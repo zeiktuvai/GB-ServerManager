@@ -12,39 +12,39 @@ namespace GB_ServerManager
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string _ActiveButtonColor = "#626050";
         public MainWindow()
         {
             InitializeComponent();
             frame.NavigationService.Navigate(new Home());
             frame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
-            btnHome.Background = (new BrushConverter()).ConvertFrom("#778c2d") as Brush;
+            btnHome.Background = (new BrushConverter()).ConvertFrom(_ActiveButtonColor) as Brush;
 
-            if (AppSettingsHelper.ReadSettings() == null)
-            {
-                btnSettings.Background = new SolidColorBrush(Colors.Red);
-            }
+            checkSettingsStatus();
         }
 
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {
             frame.NavigationService.Navigate(new Home());
-            btnHome.Background = (new BrushConverter()).ConvertFrom("#778c2d") as Brush;
+            btnHome.Background = (new BrushConverter()).ConvertFrom(_ActiveButtonColor) as Brush;
             btnServer.Background = new SolidColorBrush(Colors.Transparent);
             btnSettings.Background = new SolidColorBrush(Colors.Transparent);
+            checkSettingsStatus();
         }
 
         private void btnServer_Click(object sender, RoutedEventArgs e)
         {
             frame.NavigationService.Navigate(new Servers());
-            btnServer.Background = (new BrushConverter()).ConvertFrom("#778c2d") as Brush;
+            btnServer.Background = (new BrushConverter()).ConvertFrom(_ActiveButtonColor) as Brush;
             btnHome.Background = new SolidColorBrush(Colors.Transparent);
             btnSettings.Background = new SolidColorBrush(Colors.Transparent);
+            checkSettingsStatus();
         }
 
         private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
             frame.NavigationService.Navigate(new Settings());
-            btnSettings.Background = (new BrushConverter()).ConvertFrom("#778c2d") as Brush;
+            btnSettings.Background = (new BrushConverter()).ConvertFrom(_ActiveButtonColor) as Brush;
             btnServer.Background = new SolidColorBrush(Colors.Transparent);
             btnHome.Background = new SolidColorBrush(Colors.Transparent);
         }
@@ -61,6 +61,14 @@ namespace GB_ServerManager
         {
             //TODO: add code to check if servers are running and ask if you want them to be closed.
             Close();
+        }
+
+        private void checkSettingsStatus()
+        {
+            if (AppSettingsHelper.ReadSettings() == null)
+            {
+                btnSettings.Background = new SolidColorBrush(Colors.Red);
+            }
         }
 
     }
