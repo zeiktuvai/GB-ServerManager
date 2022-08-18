@@ -15,7 +15,15 @@ namespace GB_ServerManager.Views
     {
         public Servers()
         {
-            InitializeComponent();          
+            InitializeComponent();
+            var serverList = JSONHelper.ReadServersFromFile();
+            if (serverList.Servers != null)
+            {
+                foreach (var server in serverList.Servers)
+                {
+                    tbcServerList.Items.Add(server);
+                }
+            }
         }
 
         private void btnAddExisting_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -61,7 +69,7 @@ namespace GB_ServerManager.Views
                     {
                         var Server = GBServerHelper.RetrieveGBServerProperties(BasePath, ServerExePath);
                         tbcServerList.Items.Add(Server);
-                        //TODO: Save to JSON server file
+                        JSONHelper.SaveServerToFile(Server);
                     }
 
                 }

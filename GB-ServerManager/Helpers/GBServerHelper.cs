@@ -48,11 +48,11 @@ namespace GB_ServerManager.Helpers
                 {
                     if (item.Contains("ServerName="))
                     {
-                        NewServer.ServerName = item.Substring(item.IndexOf('=') + 1);
+                        NewServer.ServerName = item.Substring(item.IndexOf('=') + 1).Trim();
                     }
                     if (item.Contains("ServerMOTD="))
                     {
-                        NewServer.ServerMOTD = item.Substring(item.IndexOf('=') + 1);
+                        NewServer.ServerMOTD = item.Substring(item.IndexOf('=') + 1).Trim();
                     }
                     if (item.Contains("MaxPlayers="))
                     {
@@ -66,11 +66,11 @@ namespace GB_ServerManager.Helpers
                     }
                     if (item.Contains("GameRules="))
                     {
-                        NewServer.GameRules = item.Substring(item.IndexOf('=') + 1);
+                        NewServer.GameRules = item.Substring(item.IndexOf('=') + 1).Trim();
                     }
                     if (item.Contains("ServerPassword="))
                     {
-                        NewServer.ServerPassword = item.Substring(item.IndexOf('=') + 1);
+                        NewServer.ServerPassword = item.Substring(item.IndexOf('=') + 1).Trim();
                     }
                 }
             } else

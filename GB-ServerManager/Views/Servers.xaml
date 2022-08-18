@@ -15,7 +15,30 @@
             <ColumnDefinition Width="40" />
         </Grid.ColumnDefinitions>
 
-        <TabControl Name="tbcServerList" Background="#555346" BorderThickness="0">
+        <TabControl Name="tbcServerList" Background="#555346" BorderThickness="0" TabStripPlacement="Left">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border x:Name="Border" CornerRadius="4" Padding="5,0,0,0">
+                                    <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Left" ContentSource="Header" 
+                                                      Height="28" Width="100" Margin="0" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="#626050" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Border" Property="Background" Value="#555346" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            
             <TabControl.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding Header}" />
@@ -38,7 +61,7 @@
                             <TextBox x:Name="tbxQueryPort" Text="{Binding QueryPort}" Width="20" Margin="0,4,0,4" HorizontalAlignment="Left"/>
                             <xctk:IntegerUpDown x:Name="tbxRestartTime" Value="{Binding RestartTime}" Width="60" Height="30" Maximum="24" Minimum="0" DefaultValue="12" HorizontalAlignment="Left"/>
                         </StackPanel>
-                    </StackPanel>                       
+                    </StackPanel>
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>

@@ -9,6 +9,6 @@
       Title="Home">
 
     <Grid>
-       
+        <Button Content="sTest" Height="50" Width="50" Click="TestMethod"/>
     </Grid>
 </Page>
