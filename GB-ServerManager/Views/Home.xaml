@@ -66,8 +66,8 @@
 
                                 <Label Content="{Binding _PlayerStats}" FontWeight="Bold"  Grid.Row="1" />
                                 <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="50,0,0,0">
-                                    <Button Style="{StaticResource ActionButton}">&#xF5B0;</Button>
-                                    <Button Style="{StaticResource ActionButton}">&#xE15B;</Button>
+                                    <Button Name="btnStart" Click="btnStart_Click" Style="{StaticResource ActionButton}">&#xF5B0;</Button>
+                                    <Button Name="btnStop" Click="btnStop_Click" Style="{StaticResource ActionButton}">&#xE15B;</Button>
                                     <Button Name="btnEdit" Click="btnEdit_Click" Style="{StaticResource ActionButton}">&#xE104;</Button>
                                 </StackPanel>
 

@@ -1,13 +1,11 @@
-﻿using System;
-using System.IO;
+﻿using GB_ServerManager.Helpers;
+using GB_ServerManager.Models;
+using GB_ServerManager.Services;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Windows.Controls;
-using GB_ServerManager.Helpers;
-using GB_ServerManager.Models;
-using Microsoft.Win32;
-using Xceed.Wpf.Toolkit;
-using GB_ServerManager.Services;
-using System.Collections.Generic;
 using System.Windows.Media;
 
 namespace GB_ServerManager.Views
@@ -26,7 +24,9 @@ namespace GB_ServerManager.Views
 
         public void TestMethod(object sender, EventArgs e)
         {
-            var test = SteamA2SHelper.A2S_INFO.GetA2SInformation(new IPEndPoint(IPAddress.Parse("75.15.0.21"),27016));
+            //var test = SteamA2SHelper.A2S_INFO.GetA2SInformation(new IPEndPoint(IPAddress.Parse("75.15.0.21"),27016));
+            //ProcessHelper.StartServer(new ServerSetting());
+            //ProcessHelper.StopServer();
         }
        
         private List<ServerSetting> UpdateServerStatus(ServerList list)
@@ -36,7 +36,7 @@ namespace GB_ServerManager.Views
                 item._Status = new SolidColorBrush(Colors.Red);
 
                 if (item._ServerPID == 0)
-                {   
+                {   //TODO: set this to localhost
                     var PlayerStats = SteamA2SHelper.A2S_INFO.GetA2SInformation(new IPEndPoint(IPAddress.Parse("75.15.0.21"), 27016));
                     item._PlayerStats = string.Format("Players: {0}/{1}", PlayerStats.Players, PlayerStats.MaxPlayers);
                     if (PlayerStats.MaxPlayers != 0)
@@ -60,5 +60,20 @@ namespace GB_ServerManager.Views
             
             NavigationService.Navigate(new Servers(index));
         }
+
+        private void btnStart_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var server = ((sender as Button).DataContext as ServerSetting);
+            ProcessHelper.StartServer(server);
+            UpdateServerStatus(ServerCache._ServerList);
+        }
+
+        private void btnStop_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var server = ((sender as Button).DataContext as ServerSetting);
+            ProcessHelper.StopServer(server._ServerPID);
+            UpdateServerStatus(ServerCache._ServerList);
+        }
+
     }
 }
