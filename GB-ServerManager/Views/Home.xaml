@@ -7,8 +7,87 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Home">
-
+    <Page.Resources>
+        <Style TargetType="Button" x:Key="ActionButton">
+            <Setter Property="Width" Value="25"/>
+            <Setter Property="Height" Value="25" />
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+            <Setter Property="Margin" Value="10,0,0,0" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />            
+        </Style>
+    </Page.Resources>
+    
     <Grid>
-        <Button Content="sTest" Height="50" Width="50" Click="TestMethod"/>
+        <ListView Name="lvServers" Padding="10,10,0,0" Background="Transparent" BorderBrush="Transparent" >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                    <Setter Property="Margin" Value="10,0,0,0" />
+                </Style>
+            </ListView.ItemContainerStyle>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="600" Height="75" Background="#626050">                        
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Canvas Background="{Binding _Status}" />
+
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="100" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Content="{Binding ServerName}" FontSize="18" FontWeight="Bold" Grid.ColumnSpan="2"/>
+
+                                <Label Content="{Binding _PlayerStats}" FontWeight="Bold"  Grid.Row="1" />
+                                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="50,0,0,0">
+                                    <Button Style="{StaticResource ActionButton}">&#xF5B0;</Button>
+                                    <Button Style="{StaticResource ActionButton}">&#xE15B;</Button>
+                                    <Button Name="btnEdit" Click="btnEdit_Click" Style="{StaticResource ActionButton}">&#xE104;</Button>
+                                </StackPanel>
+
+
+                            </Grid>
+
+                            <StackPanel Grid.Column="1">
+                                <Label Content="{Binding Port}" />
+                                <Label Content="{Binding QueryPort}" />
+                                <TextBlock>                                    
+                                    <Run Text="Restart: " />
+                                    <Run Text="{Binding RestartTime}"/>
+                                    <Run Text="hr" />
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Content="sTest" Height="50" Width="50" Click="TestMethod" VerticalAlignment="Bottom"/>
     </Grid>
 </Page>

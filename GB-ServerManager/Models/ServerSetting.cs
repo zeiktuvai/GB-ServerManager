@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows.Media;
+using System.Text.Json.Serialization;
 
 namespace GB_ServerManager.Models
 {
@@ -20,5 +17,13 @@ namespace GB_ServerManager.Models
         public int MaxPlayers { get; set; }
         public int MaxSpectators { get; set; }
         public string GameRules { get; set; }
+        [JsonIgnore]
+        public SolidColorBrush _Status { get; set; }
+        [JsonIgnore]
+        public string _PlayerStats { get; set; }
+        [JsonIgnore]
+        public int _ServerPID { get; set; }
+        [JsonIgnore]
+        public bool _LaunchSepLogWindow { get; set; }
     }
 }

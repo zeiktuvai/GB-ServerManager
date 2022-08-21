@@ -4,6 +4,9 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using GB_ServerManager.Services;
+using GB_ServerManager.Models;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace GB_ServerManager
 {
@@ -16,10 +19,15 @@ namespace GB_ServerManager
         public MainWindow()
         {
             InitializeComponent();
+
+            ServerCache._ServerList = JSONHelper.ReadServersFromFile() ?? new ServerList();
+            //ServerCache._ServerCache = new MemoryCache(new MemoryCacheOptions());
+            //ServerCache._ServerCache.Set<ServerList>("servers", );
+            //var test = ServerCache._ServerCache.Get<ServerList>("servers");
+
             frame.NavigationService.Navigate(new Home());
             frame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
-            btnHome.Background = (new BrushConverter()).ConvertFrom(_ActiveButtonColor) as Brush;
-
+            btnHome.Background = (new BrushConverter()).ConvertFrom(_ActiveButtonColor) as Brush;            
             checkSettingsStatus();
         }
 
@@ -65,10 +73,10 @@ namespace GB_ServerManager
 
         private void checkSettingsStatus()
         {
-            if (AppSettingsHelper.ReadSettings() == null)
-            {
-                btnSettings.Background = new SolidColorBrush(Colors.Red);
-            }
+            //if (AppSettingsHelper.ReadSettings() == null)
+            //{
+            //    btnSettings.Background = new SolidColorBrush(Colors.Red);
+            //}
         }
 
     }

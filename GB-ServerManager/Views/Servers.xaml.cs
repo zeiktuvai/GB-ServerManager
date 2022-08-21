@@ -16,6 +16,19 @@ namespace GB_ServerManager.Views
         public Servers()
         {
             InitializeComponent();
+            PopulateServerList();
+        }
+
+        public Servers(int index)
+        {
+            InitializeComponent();
+            PopulateServerList();
+            tbcServerList.SelectedIndex = index;
+                        
+        }
+
+        private void PopulateServerList()
+        {
             var serverList = JSONHelper.ReadServersFromFile();
             if (serverList.Servers != null)
             {
@@ -68,7 +81,8 @@ namespace GB_ServerManager.Views
                     else
                     {
                         var Server = GBServerHelper.RetrieveGBServerProperties(BasePath, ServerExePath);
-                        tbcServerList.Items.Add(Server);
+                        var item = tbcServerList.Items.Add(Server);
+                        tbcServerList.SelectedIndex = item;
                         JSONHelper.SaveServerToFile(Server);
                     }
 

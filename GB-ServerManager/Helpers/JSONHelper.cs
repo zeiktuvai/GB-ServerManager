@@ -63,7 +63,7 @@ namespace GB_ServerManager.Helpers
             return false;
         }
 
-        internal static ServerList ReadServersFromFile()
+        internal static ServerList? ReadServersFromFile()
         {
             string path = Path.Combine(_LocalAppDataPath, _FileName);
             ServerList serverList = new ServerList();
