@@ -31,26 +31,31 @@ namespace GB_ServerManager.Views
        
         private List<ServerSetting> UpdateServerStatus(ServerList list)
         {
-            foreach (var item in list.Servers)
+            if (list != null && list.Servers != null)
             {
-                item._Status = new SolidColorBrush(Colors.Red);
+                foreach (var item in list.Servers)
+                {
+                    item._Status = new SolidColorBrush(Colors.Red);
 
-                if (item._ServerPID != 0)
-                {   //TODO: set this to localhost
-                    var PlayerStats = SteamA2SHelper.A2S_INFO.GetA2SInformation(new IPEndPoint(IPAddress.Parse("75.15.0.21"), 27016));
-                    item._PlayerStats = string.Format("Players: {0}/{1}", PlayerStats.Players, PlayerStats.MaxPlayers);
-                    if (PlayerStats.MaxPlayers != 0)
+                    if (item._ServerPID != 0)
+                    {   //TODO: set this to localhost
+                        var PlayerStats = SteamA2SHelper.A2S_INFO.GetA2SInformation(new IPEndPoint(IPAddress.Parse("75.15.0.21"), 27016));
+                        item._PlayerStats = string.Format("Players: {0}/{1}", PlayerStats.Players, PlayerStats.MaxPlayers);
+                        if (PlayerStats.MaxPlayers != 0)
+                        {
+                            item._Status = new SolidColorBrush(Colors.Green);
+                        }
+                    }
+                    else
                     {
-                        item._Status = new SolidColorBrush(Colors.Green);
+                        item._PlayerStats = "Players: 0/0";
                     }
                 }
-                else
-                {
-                    item._PlayerStats = "Players: 0/0";
-                }
+
+                return list.Servers;
             }
 
-            return list.Servers;
+            return new List<ServerSetting>();
         }
 
         private void btnEdit_Click(object sender, System.Windows.RoutedEventArgs e)

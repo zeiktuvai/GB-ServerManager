@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace GB_ServerManager.Models
 {
-    internal class ServerSetting
+    public class ServerSetting
     {
         public string Header { get; set; }
         public string ServerBasePath { get; set; }

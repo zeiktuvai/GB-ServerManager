@@ -16,8 +16,6 @@ namespace GB_ServerManager.Views
     /// </summary>
     public partial class Servers : Page
     {
-        internal List<ServerSetting> _ServerList { get; set; }
-        
         public Servers()
         {
             InitializeComponent();
@@ -28,20 +26,19 @@ namespace GB_ServerManager.Views
         {
             InitializeComponent();
             PopulateServerList();
-            tbcServerList.SelectedIndex = index;
+            //tbcServerList.SelectedIndex = index;
                         
         }
 
         private void PopulateServerList()
         {
             ServerCache._ServerList = JSONHelper.ReadServersFromFile();
-            if (ServerCache._ServerList.Servers != null)
+            if (ServerCache._ServerList != null && ServerCache._ServerList.Servers != null)
             {
-                _ServerList = ServerCache._ServerList.Servers;
-                //foreach (var server in _ServerList)
-                //{
-                //    tbcServerList.Items.Add(server);
-                //}
+                foreach (var server in ServerCache._ServerList.Servers)
+                {
+                    lvServers.Items.Add(server);
+                }                 
             }
         }
 
@@ -87,8 +84,10 @@ namespace GB_ServerManager.Views
                     else
                     {
                         var Server = GBServerHelper.RetrieveGBServerProperties(BasePath, ServerExePath);
-                        var item = tbcServerList.Items.Add(Server);
-                        tbcServerList.SelectedIndex = item;
+                        lvServers.Items.Add(Server);
+                        lvServers.SelectedItem = Server;
+                        //var item = tbcServerList.Items.Add(Server);
+                        //tbcServerList.SelectedIndex = item;
                         JSONHelper.SaveServerToFile(Server);
                     }
 
@@ -109,6 +108,12 @@ namespace GB_ServerManager.Views
             //var test = VisualTreeHelper.GetChild(parent, 1);
             //var test2 = VisualTreeHelper.GetChild(test, 3);
             //BaseServerSetting.MultiHome = tbxSrvrMulHome.Text;
+        }
+
+        private void btnServer_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var val = ((sender as Button).DataContext as ServerSetting);
+            frmServer.Navigate(new Servers_Settings(val));
         }
     }
 }

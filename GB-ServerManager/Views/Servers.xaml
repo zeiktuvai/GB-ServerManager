@@ -4,36 +4,58 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GB_ServerManager.Views"
-      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Servers">
     <Page.Resources>
-        <ControlTemplate x:Key="flatTextBox" TargetType="TextBox">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="2" />
-                </Grid.RowDefinitions>
-                
-                <TextBox Text="{TemplateBinding Text}" Foreground="Black" Background="Transparent" BorderBrush="Transparent"/>
-                <Border CornerRadius="10" Grid.Row="1" ClipToBounds="True" Background="#464855" />
-            </Grid>
-            
-        </ControlTemplate>
+        <Style x:Key="BaseButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Margin" Value="0,5,0,0" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Width" Value="123" />
+        </Style>
+        <Style x:Key="IconButton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value=".5" />
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="0,0,5,0" />
+        </Style>
     </Page.Resources>
 
-    <Page.DataContext>
-        <local:Servers
-    </Page.DataContext>
-    
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="130" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="40" />
         </Grid.ColumnDefinitions>
 
-        <TabControl Name="tbcServerList" Background="#555346" BorderThickness="0" TabStripPlacement="Left" ItemsSource="{Binding}">
+        <ListView x:Name="lvServers" Width="130" Background="Transparent">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                    <Setter Property="Margin" Value="2,0,0,0" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Button x:Name="btnServer" Click="btnServer_Click" Content="{Binding ServerName}" Style="{StaticResource BaseButton}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Frame x:Name="frmServer" Grid.Column="1"></Frame>
+        <!--<TabControl Name="tbcServerList" Background="#555346" BorderThickness="0" TabStripPlacement="Left" ItemsSource="{Binding}">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -56,7 +78,7 @@
                     </Setter>
                 </Style>
             </TabControl.Resources>
-            
+
             <TabControl.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding Header}" />
@@ -64,68 +86,30 @@
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>
                 <DataTemplate>
-                    <TabControl Background="#555346" BorderThickness="0" Margin="5,-2,0,0">
-                        <TabItem>
-                            <TabItem.Header>
-                                <Label Content="Settings" HorizontalAlignment="Center"/>
-                            </TabItem.Header>
-                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                <StackPanel Orientation="Vertical">
-                                    <Label FontWeight="Bold" Content="Server Name:" />
-                                    <Label FontWeight="Bold" Margin="0,3,0,0" Content="Server Path:" />
-                                    <Label FontWeight="Bold" Margin="0,3,0,0" Content="Multi-Home:" />
-                                    <Label FontWeight="Bold" Margin="0,1,0,0" Content="Server Port:" />
-                                    <Label FontWeight="Bold" Margin="0,3,0,0" Content="Query Port:" />
-                                    <Label FontWeight="Bold" Margin="0,10,0,0" Content="Restart Time:" />
-                                    <TextBlock FontWeight="Bold" Margin="6,0,0,0">
-                                        Start Log in <LineBreak/>
-                                        New Window:
-                                    </TextBlock>
-                                    <Border Background="#464855" Margin="0,10,0,0" CornerRadius="5">
-                                        <Button Name="btnSaveServer" Click="btnSaveServer_Click" Background="Transparent" BorderBrush="Transparent">
-                                            <StackPanel Orientation="Horizontal">
-                                                <Label FontFamily="Segoe MDL2 Assets" Content="&#xE105;" FontSize="16"/>
-                                                <Label Content="Save" />
-                                            </StackPanel>
-                                        </Button>                                        
-                                    </Border>
-                                </StackPanel>
-                                <StackPanel Orientation="Vertical">
-                                    <TextBox x:Name="tbxSrvrName" Template="{StaticResource flatTextBox}" Text="{Binding ServerName}" Width="400" Margin="0,4,0,4"/>
-                                    <TextBox x:Name="tbxSrvrPath" Template="{StaticResource flatTextBox}" Text="{Binding ServerPath}" Width="400" Margin="0,4,0,4"/>
-                                    <TextBox x:Name="tbxSrvrMulHome" Template="{StaticResource flatTextBox}" Text="{Binding MultiHome, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="400" Margin="0,4,0,4"/>
-                                    <TextBox x:Name="tbxServerPort" Template="{StaticResource flatTextBox}" Text="{Binding Port}"  Width="50" Margin="0,4,0,4" HorizontalAlignment="Left"/>
-                                    <TextBox x:Name="tbxQueryPort" Template="{StaticResource flatTextBox}" Text="{Binding QueryPort}" Width="50" Margin="0,4,0,4" HorizontalAlignment="Left"/>
-                                    <xctk:IntegerUpDown Background="Transparent" BorderBrush="Transparent" x:Name="tbxRestartTime" Value="{Binding RestartTime}" Width="60" Height="30" Maximum="24" Minimum="0" DefaultValue="12" HorizontalAlignment="Left"/>
-                                    <Border Height="2" Width="60" HorizontalAlignment="Left" Background="#464855" CornerRadius="5" />
-                                    <CheckBox x:Name="cbxOpenLogWindow" Margin="5,14,0,0" Background="Transparent" BorderBrush="#464855" BorderThickness="2"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </TabItem>                        
-                    </TabControl>
-                </DataTemplate>
-            </TabControl.ContentTemplate>            
-        </TabControl>
+                    <Grid Margin="10,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="29" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
 
-        <Button Name="btnAddExisting" Grid.Column="1" Height="40" VerticalAlignment="Top" FontFamily="Segoe MDL2 Assets" Background="Transparent" BorderThickness=".5" Click="btnAddExisting_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="bttnSettings" Height="29" Width="30" Click="bttnSettings_Click" Style="{StaticResource IconButton}">&#xE115;</Button>
+                        </StackPanel>
+
+                        <Frame Grid.Row="1" Name="frmServer" ></Frame>
+                    </Grid>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+            
+            
+        </TabControl>-->
+
+        <Button Name="btnAddExisting" Grid.Column="2" Height="40" Style="{StaticResource IconButton}" VerticalAlignment="Top" Click="btnAddExisting_Click">
             &#xE8E5;
             <Button.ToolTip>
                 <ToolTip Content="Add existing server" />
             </Button.ToolTip>
         </Button>
-        
+
     </Grid>
 </Page>
-
-<!--public string Header { get; set; }
-        public string ServerBasePath { get; set; }
-        public string ServerName { get; set; }
-        public string ServerPath { get; set; }
-        public string ServerMOTD { get; set; }
-        public string ServerPassword { get; set; }
-        public int Port { get; set; }
-        public int QueryPort { get; set; }
-        public int RestartTime { get; set; }
-        public int MaxPlayers { get; set; }
-        public int MaxSpectators { get; set; }
-        public string GameRules { get; set; }-->
