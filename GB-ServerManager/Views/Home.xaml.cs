@@ -35,7 +35,7 @@ namespace GB_ServerManager.Views
             {
                 item._Status = new SolidColorBrush(Colors.Red);
 
-                if (item._ServerPID == 0)
+                if (item._ServerPID != 0)
                 {   //TODO: set this to localhost
                     var PlayerStats = SteamA2SHelper.A2S_INFO.GetA2SInformation(new IPEndPoint(IPAddress.Parse("75.15.0.21"), 27016));
                     item._PlayerStats = string.Format("Players: {0}/{1}", PlayerStats.Players, PlayerStats.MaxPlayers);

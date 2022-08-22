@@ -1,10 +1,13 @@
 ﻿using System.Windows.Controls;
 using GB_ServerManager.Models;
 using GB_ServerManager.Helpers;
+using GB_ServerManager.Services;
 using Microsoft.Win32;
 using System.IO;
 using System.Text.RegularExpressions;
 using Xceed.Wpf.Toolkit;
+using System.Windows.Media;
+using System.Collections.Generic;
 
 namespace GB_ServerManager.Views
 {
@@ -13,6 +16,8 @@ namespace GB_ServerManager.Views
     /// </summary>
     public partial class Servers : Page
     {
+        internal List<ServerSetting> _ServerList { get; set; }
+        
         public Servers()
         {
             InitializeComponent();
@@ -29,13 +34,14 @@ namespace GB_ServerManager.Views
 
         private void PopulateServerList()
         {
-            var serverList = JSONHelper.ReadServersFromFile();
-            if (serverList.Servers != null)
+            ServerCache._ServerList = JSONHelper.ReadServersFromFile();
+            if (ServerCache._ServerList.Servers != null)
             {
-                foreach (var server in serverList.Servers)
-                {
-                    tbcServerList.Items.Add(server);
-                }
+                _ServerList = ServerCache._ServerList.Servers;
+                //foreach (var server in _ServerList)
+                //{
+                //    tbcServerList.Items.Add(server);
+                //}
             }
         }
 
@@ -94,6 +100,15 @@ namespace GB_ServerManager.Views
             }
 
            
+        }
+
+        private void btnSaveServer_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var BaseServerSetting = ((sender as Button).DataContext as ServerSetting);
+            //var parent = VisualTreeHelper.GetParent(VisualTreeHelper.GetParent(VisualTreeHelper.GetParent(sender as Button)));
+            //var test = VisualTreeHelper.GetChild(parent, 1);
+            //var test2 = VisualTreeHelper.GetChild(test, 3);
+            //BaseServerSetting.MultiHome = tbxSrvrMulHome.Text;
         }
     }
 }
