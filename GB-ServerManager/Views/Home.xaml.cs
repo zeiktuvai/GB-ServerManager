@@ -22,12 +22,6 @@ namespace GB_ServerManager.Views
           
         }
 
-        public void TestMethod(object sender, EventArgs e)
-        {
-            //var test = SteamA2SHelper.A2S_INFO.GetA2SInformation(new IPEndPoint(IPAddress.Parse("75.15.0.21"),27016));
-            //ProcessHelper.StartServer(new ServerSetting());
-            //ProcessHelper.StopServer();
-        }
        
         private List<ServerSetting> UpdateServerStatus(ServerList list)
         {

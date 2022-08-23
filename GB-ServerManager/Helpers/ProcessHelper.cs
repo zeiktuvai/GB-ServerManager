@@ -24,7 +24,7 @@ namespace GB_ServerManager.Helpers
                     StartInfo = new ProcessStartInfo
                     {
                         FileName = server.ServerPath,
-                        Arguments = String.Format("Multihome={0} Port={1} QueryPort={2} ScheduledShutdownTime={3} -LOCALLOGTIMES -log", "0.0.0.0", server.Port, server.QueryPort, server.RestartTime),
+                        Arguments = String.Format("Multihome={0} Port={1} QueryPort={2} ScheduledShutdownTime={3} -LOCALLOGTIMES -log", server.MultiHome, server.Port, server.QueryPort, server.RestartTime),
                         WindowStyle = ProcessWindowStyle.Hidden,
                         RedirectStandardOutput = true
                     }

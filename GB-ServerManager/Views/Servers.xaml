@@ -28,11 +28,11 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="130" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="40" />
+            <ColumnDefinition Width="50" />
         </Grid.ColumnDefinitions>
 
-        <ListView x:Name="lvServers" Width="130" Background="Transparent">
-            <ListView.ItemContainerStyle>
+        <ListView x:Name="lvServers" Width="129" Background="Transparent" BorderBrush="Transparent" SelectionMode="Single" SelectionChanged="lvServers_SelectionChanged">
+            <!--<ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="Background" Value="Transparent" />
                     <Setter Property="Template">
@@ -45,11 +45,13 @@
                     <Setter Property="HorizontalAlignment" Value="Left" />
                     <Setter Property="Margin" Value="2,0,0,0" />
                 </Style>
-            </ListView.ItemContainerStyle>
+            </ListView.ItemContainerStyle>-->
             
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Button x:Name="btnServer" Click="btnServer_Click" Content="{Binding ServerName}" Style="{StaticResource BaseButton}" />
+                    <Grid Width="115">
+                        <Label Content="{Binding ServerName}"/>
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
@@ -104,7 +106,7 @@
             
         </TabControl>-->
 
-        <Button Name="btnAddExisting" Grid.Column="2" Height="40" Style="{StaticResource IconButton}" VerticalAlignment="Top" Click="btnAddExisting_Click">
+        <Button Name="btnAddExisting" Grid.Column="2" Height="40" Width="40" Style="{StaticResource IconButton}" VerticalAlignment="Top" Click="btnAddExisting_Click">
             &#xE8E5;
             <Button.ToolTip>
                 <ToolTip Content="Add existing server" />

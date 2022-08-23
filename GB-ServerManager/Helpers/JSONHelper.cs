@@ -10,48 +10,51 @@ namespace GB_ServerManager.Helpers
     {
         private const string _FileName = "ServerList.JSON";
         private static string _LocalAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\GB_ServerManager";
-        internal static bool SaveServerToFile(ServerSetting ServerToSave)
+        internal static bool SaveServerToFile(ServerList Servers)
         {
             string path = Path.Combine(_LocalAppDataPath, _FileName);
-            ServerList serverList = new ServerList();
+            ServerList serverList = Servers;
 
-            if (ServerToSave != null)
+            if (serverList != null)
             {
-                if (File.Exists(path))
-                {
-                    serverList = ReadServersFromFile();
-                }
+                //if (File.Exists(path))
+                //{
+                //    serverList = ReadServersFromFile();
+                //}
 
                 try
                 {
-                    if (serverList.Servers != null)
-                    {
-                        var serverFound = serverList.Servers.Find(p => p.ServerPath == ServerToSave.ServerPath);
-                       
-                        if (serverFound != null)
-                        {
-                            serverList.Servers[serverList.Servers.IndexOf(serverFound)] = ServerToSave;
-                        }
-                        else
-                        {
-                            serverList.Servers.Add(ServerToSave);
-                        }
-                       
-                        string JSONString = JsonSerializer.Serialize(serverList);
-                        File.WriteAllText(path, JSONString);
-                    }
-                    else
-                    {
-                        serverList.Servers = new List<ServerSetting>();
-                        serverList.Servers.Add(ServerToSave);
-                        string JSONString = JsonSerializer.Serialize(serverList);
+                    File.WriteAllText(path, JsonSerializer.Serialize(serverList));
+                    return true;
 
-                        if (!Directory.Exists(_LocalAppDataPath))
-                        {
-                            Directory.CreateDirectory(_LocalAppDataPath);
-                        }
-                        File.WriteAllText(path, JSONString);
-                    }
+                    //if (serverList.Servers != null)
+                    //{
+                    //    var serverFound = serverList.Servers.Find(p => p.ServerPath == ServerToSave.ServerPath);
+                       
+                    //    if (serverFound != null)
+                    //    {
+                    //        serverList.Servers[serverList.Servers.IndexOf(serverFound)] = ServerToSave;
+                    //    }
+                    //    else
+                    //    {
+                    //        serverList.Servers.Add(ServerToSave);
+                    //    }
+                       
+                    //    string JSONString = JsonSerializer.Serialize(serverList);
+                    //    File.WriteAllText(path, JSONString);
+                    //}
+                    //else
+                    //{
+                    //    serverList.Servers = new List<ServerSetting>();
+                    //    serverList.Servers.Add(ServerToSave);
+                    //    string JSONString = JsonSerializer.Serialize(serverList);
+
+                    //    if (!Directory.Exists(_LocalAppDataPath))
+                    //    {
+                    //        Directory.CreateDirectory(_LocalAppDataPath);
+                    //    }
+                    //    File.WriteAllText(path, JSONString);
+                    //}
 
                 }
                 catch (Exception)

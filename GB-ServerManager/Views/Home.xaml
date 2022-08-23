@@ -75,8 +75,14 @@
                             </Grid>
 
                             <StackPanel Grid.Column="1">
-                                <Label Content="{Binding Port}" />
-                                <Label Content="{Binding QueryPort}" />
+                                <TextBlock>
+                                    <Run Text="Port:   "/>
+                                    <Run Text="{Binding Port}"/>
+                                </TextBlock>                                
+                                <TextBlock Margin="0,5,0,5">
+                                    <Run Text="Query:" />
+                                    <Run Text="{Binding QueryPort}" />                                    
+                                </TextBlock>                                
                                 <TextBlock>                                    
                                     <Run Text="Restart: " />
                                     <Run Text="{Binding RestartTime}"/>
@@ -88,6 +94,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Content="sTest" Height="50" Width="50" Click="TestMethod" VerticalAlignment="Bottom"/>
     </Grid>
 </Page>

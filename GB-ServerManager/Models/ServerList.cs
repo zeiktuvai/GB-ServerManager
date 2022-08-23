@@ -2,7 +2,7 @@
 
 namespace GB_ServerManager.Models
 {
-    internal class ServerList
+    public class ServerList
     {
         public List<ServerSetting> Servers { get; set; }
     }

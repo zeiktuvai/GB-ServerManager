@@ -20,25 +20,29 @@ namespace GB_ServerManager.Views
         {
             InitializeComponent();
             PopulateServerList();
+            lvServers.SelectedIndex = 0;
+            if (lvServers.Items.Count != 0)
+            {
+                NavigateServerSelection(lvServers.SelectedItem as ServerSetting);
+            }
         }
 
         public Servers(int index)
         {
             InitializeComponent();
             PopulateServerList();
-            //tbcServerList.SelectedIndex = index;
+            lvServers.SelectedIndex = index;
+            NavigateServerSelection(lvServers.SelectedItem as ServerSetting);
                         
         }
 
         private void PopulateServerList()
         {
-            ServerCache._ServerList = JSONHelper.ReadServersFromFile();
-            if (ServerCache._ServerList != null && ServerCache._ServerList.Servers != null)
+            var serverList = ServerService.GetGBServers();
+
+            foreach (var server in serverList.Servers)
             {
-                foreach (var server in ServerCache._ServerList.Servers)
-                {
-                    lvServers.Items.Add(server);
-                }                 
+                lvServers.Items.Add(server);
             }
         }
 
@@ -83,12 +87,15 @@ namespace GB_ServerManager.Views
                     }
                     else
                     {
-                        var Server = GBServerHelper.RetrieveGBServerProperties(BasePath, ServerExePath);
-                        lvServers.Items.Add(Server);
-                        lvServers.SelectedItem = Server;
-                        //var item = tbcServerList.Items.Add(Server);
-                        //tbcServerList.SelectedIndex = item;
-                        JSONHelper.SaveServerToFile(Server);
+                        try
+                        {
+                            ServerService.AddGBServer(BasePath, ServerExePath);
+                            PopulateServerList();
+                        }
+                        catch (System.Exception ex)
+                        {
+                            MessageBox.Show(string.Format("Error adding server. {0}", ex.Message), "Error adding server.", System.Windows.MessageBoxButton.OK);                            
+                        }
                     }
 
                 }
@@ -101,19 +108,15 @@ namespace GB_ServerManager.Views
            
         }
 
-        private void btnSaveServer_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void lvServers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var BaseServerSetting = ((sender as Button).DataContext as ServerSetting);
-            //var parent = VisualTreeHelper.GetParent(VisualTreeHelper.GetParent(VisualTreeHelper.GetParent(sender as Button)));
-            //var test = VisualTreeHelper.GetChild(parent, 1);
-            //var test2 = VisualTreeHelper.GetChild(test, 3);
-            //BaseServerSetting.MultiHome = tbxSrvrMulHome.Text;
+            var val = (sender as ListView).SelectedItem as ServerSetting;
+            NavigateServerSelection(val);
         }
 
-        private void btnServer_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void NavigateServerSelection(ServerSetting server)
         {
-            var val = ((sender as Button).DataContext as ServerSetting);
-            frmServer.Navigate(new Servers_Settings(val));
+            frmServer.Navigate(new Servers_Settings(server));
         }
     }
 }

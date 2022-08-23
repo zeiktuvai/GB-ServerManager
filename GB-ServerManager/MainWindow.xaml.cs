@@ -1,12 +1,9 @@
-﻿using GB_ServerManager.Helpers;
-using GB_ServerManager.Views;
+﻿using GB_ServerManager.Views;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Navigation;
 using GB_ServerManager.Services;
-using GB_ServerManager.Models;
-using Microsoft.Extensions.Caching.Memory;
 
 namespace GB_ServerManager
 {
@@ -20,10 +17,7 @@ namespace GB_ServerManager
         {
             InitializeComponent();
 
-            ServerCache._ServerList = JSONHelper.ReadServersFromFile() ?? new ServerList();
-            //ServerCache._ServerCache = new MemoryCache(new MemoryCacheOptions());
-            //ServerCache._ServerCache.Set<ServerList>("servers", );
-            //var test = ServerCache._ServerCache.Get<ServerList>("servers");
+            ServerService.GetGBServers();
 
             frame.NavigationService.Navigate(new Home());
             frame.NavigationUIVisibility = NavigationUIVisibility.Hidden;

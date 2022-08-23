@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Text.RegularExpressions;
 using GB_ServerManager.Models;
+using System;
 
 namespace GB_ServerManager.Helpers
 {
@@ -11,6 +12,8 @@ namespace GB_ServerManager.Helpers
             string ServerConfigFile = "";
             string ServerIniPath = "";
             ServerSetting NewServer = new ServerSetting();
+
+            NewServer.ServerId = Guid.NewGuid();
 
             try
             {

@@ -1,10 +1,12 @@
 ﻿using System.Windows.Media;
 using System.Text.Json.Serialization;
+using System;
 
 namespace GB_ServerManager.Models
 {
     public class ServerSetting
     {
+        public Guid ServerId { get; set; }
         public string Header { get; set; }
         public string ServerBasePath { get; set; }
         public string ServerName { get; set; }
