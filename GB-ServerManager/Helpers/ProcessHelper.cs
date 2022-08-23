@@ -25,8 +25,8 @@ namespace GB_ServerManager.Helpers
                     {
                         FileName = server.ServerPath,
                         Arguments = String.Format("Multihome={0} Port={1} QueryPort={2} ScheduledShutdownTime={3} -LOCALLOGTIMES -log", server.MultiHome, server.Port, server.QueryPort, server.RestartTime),
-                        WindowStyle = ProcessWindowStyle.Hidden,
-                        RedirectStandardOutput = true
+                        //WindowStyle = ProcessWindowStyle.Hidden,
+                        //RedirectStandardOutput = true
                     }
 
                 };
@@ -59,6 +59,30 @@ namespace GB_ServerManager.Helpers
             }
             return false;
             
+        }
+
+        public static bool GetServerStatus(int serverPID)
+        {
+            Process proc = null;
+
+            try
+            {
+                proc = Process.GetProcessById(serverPID);
+            }
+            catch (Exception)
+            {
+                return false;                
+            }
+         
+            
+            if (proc != null && !proc.HasExited)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

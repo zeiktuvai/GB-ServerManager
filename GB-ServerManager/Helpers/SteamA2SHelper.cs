@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 
 namespace GB_ServerManager.Helpers
 {
@@ -74,8 +75,12 @@ namespace GB_ServerManager.Helpers
                 public short Port { get; set; }             //0x80
             }
             #endregion            
-            public static A2S_Information GetA2SInformation(IPEndPoint ep)
+            public static A2S_Information GetA2SInformation(IPEndPoint ep, bool initial)
             {
+                if (initial == true)
+                {
+                    Thread.Sleep(60000);
+                }
                 A2S_Information info = new A2S_Information();
                 UdpClient udp = new UdpClient();
                 udp.Send(REQUEST, REQUEST.Length, ep);

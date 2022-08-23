@@ -14,7 +14,7 @@
             <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
             <Setter Property="Margin" Value="10,0,0,0" />
             <Setter Property="FontSize" Value="18" />
-            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Background" Value="#626050" />
             <Setter Property="BorderBrush" Value="Transparent" />            
         </Style>
     </Page.Resources>

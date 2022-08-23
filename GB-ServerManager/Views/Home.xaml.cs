@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Threading;
 
 namespace GB_ServerManager.Views
 {
@@ -23,7 +24,7 @@ namespace GB_ServerManager.Views
         }
 
        
-        private List<ServerSetting> UpdateServerStatus(ServerList list)
+        private List<ServerSetting> UpdateServerStatus(ServerList list, bool initial = false)
         {
             if (list != null && list.Servers != null)
             {
@@ -32,13 +33,13 @@ namespace GB_ServerManager.Views
                     item._Status = new SolidColorBrush(Colors.Red);
 
                     if (item._ServerPID != 0)
-                    {   //TODO: set this to localhost
-                        var PlayerStats = SteamA2SHelper.A2S_INFO.GetA2SInformation(new IPEndPoint(IPAddress.Parse("75.15.0.21"), 27016));
-                        item._PlayerStats = string.Format("Players: {0}/{1}", PlayerStats.Players, PlayerStats.MaxPlayers);
-                        if (PlayerStats.MaxPlayers != 0)
-                        {
-                            item._Status = new SolidColorBrush(Colors.Green);
-                        }
+                    {
+                        item._Status = new SolidColorBrush(Colors.Green);
+
+                        //TODO: find a way to update this.
+                        PlayerCountCallback callback = new PlayerCountCallback(ReturnPlayerStats);
+                        Thread playerWorker = new Thread(() => ReturnPlayerStats(new IPEndPoint(IPAddress.Parse("127.0.0.1"), item.QueryPort), item, initial));
+                        playerWorker.Start();
                     }
                     else
                     {
@@ -63,16 +64,35 @@ namespace GB_ServerManager.Views
         private void btnStart_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             var server = ((sender as Button).DataContext as ServerSetting);
-            ProcessHelper.StartServer(server);
-            UpdateServerStatus(ServerCache._ServerList);
+            if (server._ServerPID == 0)
+            {
+                ProcessHelper.StartServer(server);
+                lvServers.ItemsSource = null;
+                lvServers.ItemsSource = UpdateServerStatus(ServerCache._ServerList, true);
+            }
         }
 
         private void btnStop_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             var server = ((sender as Button).DataContext as ServerSetting);
-            ProcessHelper.StopServer(server._ServerPID);
-            UpdateServerStatus(ServerCache._ServerList);
+            if (server._ServerPID != 0)
+            {
+                ProcessHelper.StopServer(server._ServerPID);
+                lvServers.ItemsSource = UpdateServerStatus(ServerCache._ServerList);
+            }
         }
 
+        private void ReturnPlayerStats(IPEndPoint ip, ServerSetting server, bool initial)
+        {
+            var PlayerStats = SteamA2SHelper.A2S_INFO.GetA2SInformation(ip, initial);
+            
+            if (PlayerStats.MaxPlayers != 0)
+            {
+                var updateServer = ServerCache._ServerList.Servers.Find(s => s.ServerId == server.ServerId);
+                updateServer._PlayerStats = string.Format("Players: {0}/{1}", PlayerStats.Players, PlayerStats.MaxPlayers);                
+            }
+        }
+
+        private delegate void PlayerCountCallback(IPEndPoint ip, ServerSetting server, bool initial);
     }
 }
