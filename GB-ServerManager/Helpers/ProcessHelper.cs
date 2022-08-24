@@ -50,7 +50,15 @@ namespace GB_ServerManager.Helpers
         internal static bool StopServer(int serverPID)
         {
             var serverProc = Process.GetProcessById(serverPID);
-            serverProc.Kill();
+            try
+            {
+                serverProc.Kill();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Failed to stop server, please make sure you are running as administrator", "Error stopping", System.Windows.MessageBoxButton.OK);
+                return false;
+            }
 
             if (Process.GetProcessById(serverPID).HasExited)
             {

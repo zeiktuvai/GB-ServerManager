@@ -4,6 +4,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Navigation;
 using GB_ServerManager.Services;
+using GB_ServerManager.Helpers;
+using System.Collections.Generic;
 
 namespace GB_ServerManager
 {
@@ -61,8 +63,39 @@ namespace GB_ServerManager
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: add code to check if servers are running and ask if you want them to be closed.
-            Close();
+            List<int> runningServers = new List<int>();
+
+            foreach (var server in ServerCache._ServerList.Servers)
+            {
+                if (server._ServerPID != 0 && ProcessHelper.GetServerStatus(server._ServerPID))
+                {
+                    runningServers.Add(server._ServerPID);
+                }
+            }
+
+            if (runningServers.Count > 0)
+            {
+                var test = MessageBox.Show("There are running servers, Are you sure you wish to quit and close the servers?", "Really quit bro?", MessageBoxButton.YesNo);
+                if (test == MessageBoxResult.Yes)
+                {
+                    bool allKilled = false;
+
+                    foreach (var server in runningServers)
+                    {
+                        allKilled = ProcessHelper.StopServer(server);
+                    }
+
+                    if (allKilled == true)
+                    {
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to stop all servers, you will have to manually terminate server processes.");
+                        Close();
+                    }
+                }
+            }
         }
 
         private void checkSettingsStatus()
