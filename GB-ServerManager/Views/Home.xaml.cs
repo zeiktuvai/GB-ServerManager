@@ -26,7 +26,7 @@ namespace GB_ServerManager.Views
             InitializeComponent();
             lvServers.ItemsSource = UpdateServerStatus(ServerCache._ServerList);
             dispatchTimer.Interval = new TimeSpan(0, 0, 15);
-            dispatchTimer.Tick += new EventHandler(RunServerListUpdate);
+            //dispatchTimer.Tick += new EventHandler(RunServerListUpdate);
             dispatchTimer.Tick += new EventHandler(RunServerProcessCheck);
         }
 
@@ -122,10 +122,10 @@ namespace GB_ServerManager.Views
             }
         }
 
-        private void RunServerListUpdate(object sender, EventArgs e)
+        private void RunServerListUpdate(bool initial = false)
         {
             lvServers.ItemsSource = null;
-            lvServers.ItemsSource = UpdateServerStatus(ServerCache._ServerList, true);
+            lvServers.ItemsSource = UpdateServerStatus(ServerCache._ServerList, initial);
         }
 
         private void RunServerProcessCheck(object sender, EventArgs e)
@@ -138,6 +138,11 @@ namespace GB_ServerManager.Views
                     if (status == false)
                     {
                         ProcessHelper.StartServer(server);
+                        RunServerListUpdate(true);
+                    }
+                    else
+                    {
+                        RunServerListUpdate(false);
                     }
                 }
             }
