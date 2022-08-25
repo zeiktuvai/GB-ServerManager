@@ -8,7 +8,12 @@
     <UseWPF>true</UseWPF>
 	  <Version>0.5.55</Version>
 	  <FileVersion>0.5.55</FileVersion>
+	  <ApplicationIcon>Assets\GB-logo.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\GB-logo.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.4.0" />
