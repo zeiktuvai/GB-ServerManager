@@ -24,6 +24,12 @@ namespace GB_ServerManager.Helpers
 
                 try
                 {
+
+                    if (!Directory.Exists(_LocalAppDataPath))
+                    {
+                        Directory.CreateDirectory(_LocalAppDataPath);
+                    }
+
                     File.WriteAllText(path, JsonSerializer.Serialize(serverList));
                     return true;
 
@@ -48,11 +54,6 @@ namespace GB_ServerManager.Helpers
                     //    serverList.Servers = new List<ServerSetting>();
                     //    serverList.Servers.Add(ServerToSave);
                     //    string JSONString = JsonSerializer.Serialize(serverList);
-
-                    //    if (!Directory.Exists(_LocalAppDataPath))
-                    //    {
-                    //        Directory.CreateDirectory(_LocalAppDataPath);
-                    //    }
                     //    File.WriteAllText(path, JSONString);
                     //}
 

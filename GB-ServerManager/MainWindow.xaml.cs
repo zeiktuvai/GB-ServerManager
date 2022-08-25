@@ -7,6 +7,7 @@ using GB_ServerManager.Services;
 using GB_ServerManager.Helpers;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Security.Principal;
 
 namespace GB_ServerManager
 {
@@ -35,6 +36,11 @@ namespace GB_ServerManager
             catch (System.Exception)
             {
                 lblVer.Content = "v0.0.0";                
+            }
+
+            if (!checkRunAsAdmin())
+            {
+                MessageBox.Show("Warning: You are not running this application as administrator. You may have issues starting and stopping servers.", "Not running as admin", MessageBoxButton.OK);
             }
         }
 
@@ -119,6 +125,13 @@ namespace GB_ServerManager
             //{
             //    btnSettings.Background = new SolidColorBrush(Colors.Red);
             //}
+        }
+
+        private bool checkRunAsAdmin()
+        {
+            var identity = WindowsIdentity.GetCurrent();
+            var principal = new WindowsPrincipal(identity);
+            return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
 
     }

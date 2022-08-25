@@ -40,6 +40,7 @@ namespace GB_ServerManager.Views
         {
             var serverList = ServerService.GetGBServers();
 
+            lvServers.Items.Clear();
             foreach (var server in serverList.Servers)
             {
                 lvServers.Items.Add(server);
