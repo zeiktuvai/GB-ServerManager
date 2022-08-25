@@ -89,7 +89,7 @@
                 <Border Height="2" Width="50" HorizontalAlignment="Left" Background="#464855" CornerRadius="5" Margin="0,-3,0,0"/>
                 <xctk:IntegerUpDown Background="Transparent" BorderBrush="Transparent" x:Name="tbxRestartTime" Value="{Binding RestartTime}" Width="60" Height="30" Maximum="24" Minimum="0" DefaultValue="12" HorizontalAlignment="Left" TabIndex="5"/>
                 <Border Height="2" Width="60" HorizontalAlignment="Left" Background="#464855" CornerRadius="5" />
-                <CheckBox x:Name="cbxOpenLogWindow" Margin="5,14,0,0" Background="Transparent" BorderBrush="#464855" BorderThickness="2"/>
+                <CheckBox IsChecked="True" IsEnabled="False" x:Name="cbxOpenLogWindow" Margin="5,14,0,0" Background="Transparent" BorderBrush="#464855" BorderThickness="2"/>
                 <Border Name="StatusLabel" Background="Green" CornerRadius="6" Height="19" Width="200" HorizontalAlignment="Left" Margin="10,20,0,0" Visibility="Hidden">
                     <Border.Style>
                         <Style TargetType="{x:Type Border}">

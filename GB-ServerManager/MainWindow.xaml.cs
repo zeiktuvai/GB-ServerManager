@@ -6,6 +6,7 @@ using System.Windows.Navigation;
 using GB_ServerManager.Services;
 using GB_ServerManager.Helpers;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace GB_ServerManager
 {
@@ -23,8 +24,18 @@ namespace GB_ServerManager
 
             frame.NavigationService.Navigate(new Home());
             frame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
-            btnHome.Background = (new BrushConverter()).ConvertFrom(_ActiveButtonColor) as Brush;            
+            btnHome.Background = (new BrushConverter()).ConvertFrom(_ActiveButtonColor) as Brush;
             checkSettingsStatus();
+
+            try
+            {
+                var ver = typeof(MainWindow).Assembly.GetName().Version;
+                lblVer.Content = string.Format("v{0}.{1}.{2}", ver.Major, ver.Minor, ver.Build);
+            }
+            catch (System.Exception)
+            {
+                lblVer.Content = "v0.0.0";                
+            }
         }
 
         private void btnHome_Click(object sender, RoutedEventArgs e)
@@ -95,6 +106,10 @@ namespace GB_ServerManager
                         Close();
                     }
                 }
+            }
+            else
+            {
+                Close();
             }
         }
 

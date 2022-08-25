@@ -35,7 +35,8 @@
             </Grid.ColumnDefinitions>
             
             <Label Content="Ground Branch Server Manager" FontWeight="Bold"/>
-            
+            <Label Name="lblVer" Content="Version" HorizontalAlignment="Right" />
+
             <Button x:Name="btnClose" FontSize="14" FontFamily="Segoe MDL2 Assets" Grid.Column="1" Foreground="DarkRed"
                     Click="btnClose_Click" Height="25" VerticalAlignment="Top">&#xEF2C;
                 <Button.Background>
