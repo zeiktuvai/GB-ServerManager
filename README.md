@@ -22,6 +22,6 @@ It currently has the ability to import and manage servers that already exist, Mo
 - Maybe RCON support for managing the server from the app (if implemented by the devs)
 - Ability to delete servers (including their files)
 - E-mail server status notifications
-- Possibly a doscord bot for server status and notifications (would require me to figure out how to host that bot though)
+- Possibly a discord bot for server status and notifications (would require me to figure out how to host that bot though)
 - And more as it arises..
 
