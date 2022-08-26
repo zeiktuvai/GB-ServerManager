@@ -10,9 +10,6 @@ namespace GB_ServerManager.Helpers
 {
     public static class DispatcherHelper
     {
-
-
-
         public static void RunServerProcessCheck(object sender, EventArgs e)
         {
             foreach (var server in ServerCache._ServerList.Servers)

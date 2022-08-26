@@ -114,7 +114,6 @@ namespace GB_ServerManager.Views
 
         private void RunServerListUpdate(object sender, EventArgs e)
         {
-            System.Windows.MessageBox.Show("tick");
             if (ServerCache._ServerList.Servers.FindAll(s => s._ServerPID != 0).Count > 0)
             {
                 lvServers.ItemsSource = null;
