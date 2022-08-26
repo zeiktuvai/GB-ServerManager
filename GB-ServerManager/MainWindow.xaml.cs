@@ -47,7 +47,7 @@ namespace GB_ServerManager
 
             if (!checkRunAsAdmin())
             {
-                MessageBox.Show("Warning: You are not running this application as administrator. You may have issues starting and stopping servers.", "Not running as admin", MessageBoxButton.OK);
+                MessageBox.Show("Warning: You are not running this application as administrator. You may have issues stopping running servers.", "Not running as admin", MessageBoxButton.OK);
             }
         }
 

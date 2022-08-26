@@ -202,7 +202,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:GB-ServerManager"
         "ProductCode" = "8:{AEF6D664-1B38-486D-9E72-5A8C6249A9AC}"
-        "PackageCode" = "8:{2ECB4EF6-23F7-42F6-AC43-86C4703B9231}"
+        "PackageCode" = "8:{9B6C146A-14F3-47BC-A924-187539DD4F39}"
         "UpgradeCode" = "8:{2E1C4F8C-6C60-42B6-8E57-190F42F97390}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
