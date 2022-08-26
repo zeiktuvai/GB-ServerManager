@@ -49,9 +49,9 @@ namespace GB_ServerManager.Helpers
 
         internal static bool StopServer(int serverPID)
         {
-            var serverProc = Process.GetProcessById(serverPID);
             try
             {
+                var serverProc = Process.GetProcessById(serverPID);
                 serverProc.Kill();
             }
             catch (Exception)
@@ -69,6 +69,11 @@ namespace GB_ServerManager.Helpers
             
         }
 
+        /// <summary>
+        /// Checks the provided PID to see if a process is running under that PID.
+        /// </summary>
+        /// <param name="serverPID"></param>
+        /// <returns>Returns True if the process is running, otherwise it returns False.</returns>
         public static bool GetServerStatus(int serverPID)
         {
             Process proc = null;

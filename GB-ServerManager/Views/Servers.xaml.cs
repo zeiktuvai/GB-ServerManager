@@ -14,6 +14,7 @@ namespace GB_ServerManager.Views
     /// <summary>
     /// Interaction logic for Servers.xaml
     /// </summary>
+    
     public partial class Servers : Page
     {
         public Servers()
@@ -37,11 +38,9 @@ namespace GB_ServerManager.Views
         }
 
         private void PopulateServerList()
-        {
-            var serverList = ServerService.GetGBServers();
-
+        {            
             lvServers.Items.Clear();
-            foreach (var server in serverList.Servers)
+            foreach (var server in ServerCache._ServerList.Servers)
             {
                 lvServers.Items.Add(server);
             }

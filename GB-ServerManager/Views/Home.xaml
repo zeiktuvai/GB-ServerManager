@@ -92,8 +92,7 @@
                         </Grid>
                     </Grid>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-            
+            </ListView.ItemTemplate>            
         </ListView>
     </Grid>
 </Page>

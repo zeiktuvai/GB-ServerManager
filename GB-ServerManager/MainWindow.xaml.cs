@@ -8,6 +8,8 @@ using GB_ServerManager.Helpers;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Security.Principal;
+using System.Windows.Threading;
+using System;
 
 namespace GB_ServerManager
 {
@@ -17,10 +19,15 @@ namespace GB_ServerManager
     public partial class MainWindow : Window
     {
         private const string _ActiveButtonColor = "#626050";
+        public DispatcherTimer dispatcherTimer = new DispatcherTimer();
+
         public MainWindow()
         {
             InitializeComponent();
 
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
+            dispatcherTimer.Tick += new EventHandler(DispatcherHelper.RunServerProcessCheck);
+            dispatcherTimer.Start();
             ServerService.GetGBServers();
 
             frame.NavigationService.Navigate(new Home());

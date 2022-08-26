@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Windows.Threading;
 using System.Threading;
 using Xceed.Wpf.Toolkit;
+using System.Windows;
+using System.Linq;
 
 namespace GB_ServerManager.Views
 {
@@ -19,15 +21,15 @@ namespace GB_ServerManager.Views
     /// </summary>
     public partial class Home : Page
     {
-        DispatcherTimer dispatchTimer = new DispatcherTimer();
+        private DispatcherTimer UITimer = new DispatcherTimer();
 
         public Home()
         {
             InitializeComponent();
             lvServers.ItemsSource = UpdateServerStatus(ServerCache._ServerList);
-            dispatchTimer.Interval = new TimeSpan(0, 0, 15);
-            //dispatchTimer.Tick += new EventHandler(RunServerListUpdate);
-            dispatchTimer.Tick += new EventHandler(RunServerProcessCheck);
+            UITimer.Interval = new TimeSpan(0, 0, 30);
+            UITimer.Tick += new EventHandler(RunServerListUpdate);
+            UITimer.Start();
         }
 
 
@@ -42,7 +44,14 @@ namespace GB_ServerManager.Views
 
                     if (item._ServerPID != 0)
                     {
-                        item._Status = new SolidColorBrush(Colors.Green);
+                        if (ProcessHelper.GetServerStatus(item._ServerPID))
+                        {
+                            item._Status = new SolidColorBrush(Colors.Green);
+                        }
+                        else
+                        {
+                            item._Status = new SolidColorBrush(Colors.Red);
+                        }
 
                         Task.Run(() =>
                         {
@@ -84,17 +93,12 @@ namespace GB_ServerManager.Views
         private void btnStart_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             var server = ((sender as Button).DataContext as ServerSetting);
-            if (server._ServerPID == 0)
+            if (server._ServerPID == 0 || (server._ServerPID != 0 && !ProcessHelper.GetServerStatus(server._ServerPID))) 
             {
                 ProcessHelper.StartServer(server);
                 lvServers.ItemsSource = null;
-                lvServers.ItemsSource = UpdateServerStatus(ServerCache._ServerList, true);
-
-                if (dispatchTimer.IsEnabled == false)
-                {
-                    dispatchTimer.Start();
-                }
-            }
+                lvServers.ItemsSource = UpdateServerStatus(ServerCache._ServerList, true);                
+            }            
         }
 
         private void btnStop_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -105,47 +109,18 @@ namespace GB_ServerManager.Views
                 ProcessHelper.StopServer(server._ServerPID);
                 lvServers.ItemsSource = null;
                 lvServers.ItemsSource = UpdateServerStatus(ServerCache._ServerList);
-
-                if (ServerCache._ServerList.Servers.Count > 1)
-                {
-                    var runningServers = ServerCache._ServerList.Servers.FindAll(s => s._ServerPID != 0);
-
-                    if (runningServers.Count == 0)
-                    {
-                        dispatchTimer.Stop();
-                    }
-                }
-                else
-                {
-                    dispatchTimer.Stop();
-                }
             }
         }
 
-        private void RunServerListUpdate(bool initial = false)
+        private void RunServerListUpdate(object sender, EventArgs e)
         {
-            lvServers.ItemsSource = null;
-            lvServers.ItemsSource = UpdateServerStatus(ServerCache._ServerList, initial);
-        }
-
-        private void RunServerProcessCheck(object sender, EventArgs e)
-        {
-            foreach (var server in ServerCache._ServerList.Servers)
+            System.Windows.MessageBox.Show("tick");
+            if (ServerCache._ServerList.Servers.FindAll(s => s._ServerPID != 0).Count > 0)
             {
-                if (server._ServerPID != 0)
-                {
-                    var status = ProcessHelper.GetServerStatus(server._ServerPID);
-                    if (status == false)
-                    {
-                        ProcessHelper.StartServer(server);
-                        RunServerListUpdate(true);
-                    }
-                    else
-                    {
-                        RunServerListUpdate(false);
-                    }
-                }
+                lvServers.ItemsSource = null;
+                lvServers.ItemsSource = UpdateServerStatus(ServerCache._ServerList, false);
             }
         }
+
     }
 }
