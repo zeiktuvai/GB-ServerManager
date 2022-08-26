@@ -10,7 +10,6 @@ namespace GB_ServerManager.Helpers
     {
         internal static ServerSetting RetrieveGBServerProperties(string BasePath, string ServerExePath)
         {
-            string ServerConfigFile = "";
             string ServerIniPath = "";
             ServerSetting NewServer = new ServerSetting();
 
@@ -29,15 +28,8 @@ namespace GB_ServerManager.Helpers
                     }
                 }
 
-                if (!string.IsNullOrEmpty(ServerIniPath))
-                {
-                    string _ReadFile = File.ReadAllText(ServerIniPath);
-
-                    if (!string.IsNullOrEmpty(_ReadFile))
-                    {
-                        ServerConfigFile = _ReadFile;
-                    }
-                }
+                NewServer = GetServerINIFile(NewServer);
+             
             }
             catch (System.Exception)
             {
@@ -45,48 +37,7 @@ namespace GB_ServerManager.Helpers
                 throw;
             }
 
-            if (!string.IsNullOrEmpty(ServerConfigFile))
-            {
-                var configFile = ServerConfigFile.Split(System.Environment.NewLine);
-                foreach (var item in configFile)
-                {
-                    if (item.Contains("ServerName="))
-                    {
-                        NewServer.ServerName = item.Substring(item.IndexOf('=') + 1).Trim();
-                    }
-                    if (item.Contains("ServerMOTD="))
-                    {
-                        NewServer.ServerMOTD = item.Substring(item.IndexOf('=') + 1).Trim();
-                    }
-                    if (item.Contains("MaxPlayers="))
-                    {
-                        string value = item.Substring(item.IndexOf('=') + 1);
-                        NewServer.MaxPlayers = string.IsNullOrEmpty(value) ? 0 : int.Parse(value);
-                    }
-                    if (item.Contains("MaxSpectators="))
-                    {
-                        string value = item.Substring(item.IndexOf('=') + 1);
-                        NewServer.MaxSpectators = string.IsNullOrEmpty(value) ? 0 : int.Parse(value);
-                    }
-                    if (item.Contains("GameRules="))
-                    {
-                        NewServer.GameRules = item.Substring(item.IndexOf('=') + 1).Trim();
-                    }
-                    if (item.Contains("ServerPassword="))
-                    {
-                        NewServer.ServerPassword = item.Substring(item.IndexOf('=') + 1).Trim();
-                    }
-                }
-            } else
-            {
-                NewServer.ServerName = "New Server";
-                NewServer.ServerMOTD = "";
-                NewServer.MaxPlayers = 16;
-                NewServer.MaxSpectators = 0;
-                NewServer.GameRules = "((\"AllowCheats\", False),(\"AllowDeadChat\", True),(\"AllowUnrestrictedRadio\", False),(\"AllowUnrestrictedVoice\", False),(\"SpectateEnemies\", True),(\"SpectateForceFirstPerson\", False),(\"SpectateFreeCam\", True),(\"UseTeamRestrictions\", False))";
-                NewServer.ServerPassword = "";
-
-            }
+           
 
             NewServer.ServerBasePath = BasePath;
             NewServer.ServerPath = ServerExePath;
@@ -146,7 +97,7 @@ namespace GB_ServerManager.Helpers
             return null;
         }
 
-        internal static void CreateUpdateServerINIFile(ServerSetting server)
+        internal static void CreateServerINIFile(ServerSetting server)
         {
             StringBuilder file = new StringBuilder();
             var INIPath = Path.Combine(server.ServerBasePath, "GroundBranch\\ServerConfig");
@@ -165,6 +116,67 @@ namespace GB_ServerManager.Helpers
                 Directory.CreateDirectory(INIPath);
             }
             File.WriteAllText(INIPath + "\\Server.ini", file.ToString());
+        }
+
+        internal static void UpdateServerINIFile(ServerSetting server)
+        {
+         
+        }
+
+        internal static ServerSetting GetServerINIFile(ServerSetting server)
+        {
+            var ServerIniPath = Path.Combine(server.ServerBasePath, "GroundBranch\\ServerConfig\\Server.ini");
+            string ServerConfigFile = "";
+
+            if (File.Exists(ServerIniPath))
+            {
+                string _ReadFile = File.ReadAllText(ServerIniPath);
+
+                if (!string.IsNullOrEmpty(_ReadFile))
+                {
+                    ServerConfigFile = _ReadFile;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(ServerConfigFile))
+            {
+                var configFile = ServerConfigFile.Split(System.Environment.NewLine);
+                foreach (var item in configFile)
+                {
+                    if (item.Contains("ServerName="))
+                    {
+                        server.ServerName = item.Substring(item.IndexOf('=') + 1).Trim();
+                    }
+                    if (item.Contains("ServerMOTD="))
+                    {
+                        server.ServerMOTD = item.Substring(item.IndexOf('=') + 1).Trim();
+                    }
+                    if (item.Contains("MaxPlayers="))
+                    {
+                        string value = item.Substring(item.IndexOf('=') + 1);
+                        server.MaxPlayers = string.IsNullOrEmpty(value) ? 0 : int.Parse(value);
+                    }
+                    if (item.Contains("MaxSpectators="))
+                    {
+                        string value = item.Substring(item.IndexOf('=') + 1);
+                        server.MaxSpectators = string.IsNullOrEmpty(value) ? 0 : int.Parse(value);
+                    }
+                    if (item.Contains("GameRules="))
+                    {
+                        server.GameRules = item.Substring(item.IndexOf('=') + 1).Trim();
+                    }
+                    if (item.Contains("ServerPassword="))
+                    {
+                        server.ServerPassword = item.Substring(item.IndexOf('=') + 1).Trim();
+                    }
+                }
+
+                return server;
+            }
+            else
+            {
+                throw new IOException("Failed to read Server.Ini file");
+            }
         }
     }
 }

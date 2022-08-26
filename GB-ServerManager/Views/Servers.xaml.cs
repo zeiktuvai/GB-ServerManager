@@ -1,20 +1,17 @@
-﻿using System.Windows.Controls;
-using GB_ServerManager.Models;
-using GB_ServerManager.Helpers;
+﻿using GB_ServerManager.Models;
 using GB_ServerManager.Services;
+using GB_ServerManager.Windows;
 using Microsoft.Win32;
 using System.IO;
-using System.Text.RegularExpressions;
+using System.Windows.Controls;
 using Xceed.Wpf.Toolkit;
-using System.Windows.Media;
-using System.Collections.Generic;
 
 namespace GB_ServerManager.Views
 {
     /// <summary>
     /// Interaction logic for Servers.xaml
     /// </summary>
-    
+
     public partial class Servers : Page
     {
         public Servers()
@@ -121,22 +118,8 @@ namespace GB_ServerManager.Views
 
         private void btnAddNew_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            //TODO: Open a new window to get information or something
-            //Call to get directory
-            //run steamcmd process to download
-            //XXprobably create a server INI
-            //use add server stuff to import the server dir into servercache including ports and stuff
-            ServerSetting server = new ServerSetting
-            {
-                ServerName = "[YDL] Discord Member Server",
-                ServerMOTD = "<h1>Welcome to the YDL Private Server",
-                MaxPlayers = 16,
-                MaxSpectators = 0,
-                GameRules = "((\"AllowCheats\", False),(\"AllowDeadChat\", True),(\"AllowUnrestrictedRadio\", False),(\"AllowUnrestrictedVoice\", False),(\"SpectateEnemies\", True),(\"SpectateForceFirstPerson\", False),(\"SpectateFreeCam\", True),(\"UseTeamRestrictions\", False))",
-                ServerPassword = "Y!D@L$"
-            };             
-            server.ServerBasePath = GBServerHelper.GetNewGBServerDirectory();
-            GBServerHelper.CreateUpdateServerINIFile(server);
+            AddNewGBServer addWindow = new AddNewGBServer();
+            addWindow.ShowDialog();
         }
     }
 }
