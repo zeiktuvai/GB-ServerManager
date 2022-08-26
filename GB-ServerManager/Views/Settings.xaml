@@ -8,23 +8,37 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Settings">
 
+    <Page.Resources>
+        <Style x:Key="iconButton" TargetType="Button">
+            <Setter Property="Width" Value="30" />
+            <Setter Property="Height" Value="32" />
+            <Setter Property="Margin" Value="1,1,1,1" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value=".5" />
+            
+        </Style>
+    </Page.Resources>
+    
     <Grid Background="#555346">
-
-
         <Grid  Height="35" VerticalAlignment="Top">
             <Label Content="Settings" HorizontalAlignment="Center" FontSize="18" Height="35" VerticalAlignment="Top"/>
-            <Button x:Name="bttnSaveSttngs" Width="30" Height="32" Margin="1,1,1,1" HorizontalAlignment="Right" Background="Transparent" 
-                    FontSize="18" FontFamily="Segoe MDL2 Assets" BorderBrush="Black" BorderThickness=".5" Click="bttnSaveSttngs_Click"
-                    Visibility="Hidden">
-                &#xE105;
-            </Button>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="btnDownloadSteam" Click="btnDownloadSteam_Click" Style="{StaticResource iconButton}">
+                    &#xE118;
+                    <Button.ToolTip>
+                        <ToolTip Content="Attempt to download SteamCMD automatically" />
+                    </Button.ToolTip>
+                </Button>
+                <Button x:Name="bttnSaveSttngs" Click="bttnSaveSttngs_Click" Style="{StaticResource iconButton}">
+                    &#xE105;
+                </Button>                
+            </StackPanel>
         </Grid>
 
         <StackPanel Margin="0,35,0,0">
-            
-            <Border Background="Yellow" Margin="0,10,0,10" Width="520" CornerRadius="5">
-                <Label HorizontalAlignment="Center" Content="This page does nothing at this time, earmarked for server creation funtionality to come later." />
-            </Border>
             <Label Content="Steam Command Path" FontSize="14" HorizontalAlignment="Center"/>
             
             <Grid>
@@ -60,6 +74,7 @@
                 <Button x:Name="bttnOpenServerPath" Grid.Column="1" Width="20" Background="Transparent" BorderBrush="Black" BorderThickness=".5" 
                             FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" Click="bttnOpenServerPath_Click">&#xE197;</Button>
             </Grid>
+            <Label Content="(This is where all servers that are downloaded will be installed to)" HorizontalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </Page>

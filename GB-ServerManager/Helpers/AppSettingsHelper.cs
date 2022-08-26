@@ -11,6 +11,7 @@ namespace GB_ServerManager.Helpers
             {
                 Properties.Settings.Default.BaseSrvrPath = settings.ServerBasePath;
                 Properties.Settings.Default.SteamCMDPath = settings.SteamCMDPath;
+                Properties.Settings.Default.Save();
                 return true;
             }
             catch (Exception)
@@ -33,7 +34,17 @@ namespace GB_ServerManager.Helpers
 
             }
 
-            return (!string.IsNullOrEmpty(Settings.ServerBasePath) && !string.IsNullOrEmpty(Settings.SteamCMDPath)) ? Settings : null;
+            if (string.IsNullOrEmpty(Settings.ServerBasePath))
+            {
+                Settings.ServerBasePath = "";
+            }
+
+            if (string.IsNullOrEmpty(Settings.SteamCMDPath))
+            {
+                Settings.SteamCMDPath = "";
+            }
+
+            return Settings;            
         }
     }
 }
