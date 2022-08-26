@@ -6,7 +6,7 @@ GB Server Manager was is a WPF desktop app published under the GNU Public Licens
 
 It currently has the ability to import and manage servers that already exist, Monitoring and re-starting the server after time out. As this is in active development, there may be some bugs or eccentricites that need resolved.  Please feel free to reach out or open an issue if you encounter one.
 
-## PLEASE NOTE: In order for the application to be able to stop the server process properly, you must run this application as administrator.
+Technical Note: It is recommended to run this application as administrator, however it can be ran under a standard user account.  Be warned though that occasionally the app may not be able to close the server process due to access being denied (even though the same user account started it).  In this instance you will have to close the window manually because.. windows...
 
 ### Features
 - Add existing installed servers to manage
