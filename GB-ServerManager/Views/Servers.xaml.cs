@@ -118,5 +118,25 @@ namespace GB_ServerManager.Views
         {
             frmServer.Navigate(new Servers_Settings(server));
         }
+
+        private void btnAddNew_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            //TODO: Open a new window to get information or something
+            //Call to get directory
+            //run steamcmd process to download
+            //XXprobably create a server INI
+            //use add server stuff to import the server dir into servercache including ports and stuff
+            ServerSetting server = new ServerSetting
+            {
+                ServerName = "[YDL] Discord Member Server",
+                ServerMOTD = "<h1>Welcome to the YDL Private Server",
+                MaxPlayers = 16,
+                MaxSpectators = 0,
+                GameRules = "((\"AllowCheats\", False),(\"AllowDeadChat\", True),(\"AllowUnrestrictedRadio\", False),(\"AllowUnrestrictedVoice\", False),(\"SpectateEnemies\", True),(\"SpectateForceFirstPerson\", False),(\"SpectateFreeCam\", True),(\"UseTeamRestrictions\", False))",
+                ServerPassword = "Y!D@L$"
+            };             
+            server.ServerBasePath = GBServerHelper.GetNewGBServerDirectory();
+            GBServerHelper.CreateUpdateServerINIFile(server);
+        }
     }
 }

@@ -7,24 +7,20 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Servers">
-    <Page.Resources>
-        <Style x:Key="BaseButton" TargetType="Button">
+    <Page.Resources>        
+        <Style x:Key="IconButton" TargetType="Button">
             <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="Margin" Value="0,5,0,0" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="Width" Value="123" />
-        </Style>
-        <Style x:Key="IconButton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
             <Setter Property="BorderBrush" Value="Black" />
             <Setter Property="BorderThickness" Value=".5" />
             <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
             <Setter Property="FontSize" Value="16" />
-            <Setter Property="Margin" Value="0,0,5,0" />
+            <Setter Property="Margin" Value="0,2,5,3" />
+            <Setter Property="Width" Value="40" />
+            <Setter Property="Height" Value="40" />
         </Style>
     </Page.Resources>
 
-    <Grid>
+    <Grid Background="#555346">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="130" />
             <ColumnDefinition Width="*" />
@@ -32,21 +28,6 @@
         </Grid.ColumnDefinitions>
 
         <ListView x:Name="lvServers" Width="129" Background="Transparent" BorderBrush="Transparent" SelectionMode="Single" SelectionChanged="lvServers_SelectionChanged">
-            <!--<ListView.ItemContainerStyle>
-                <Style TargetType="{x:Type ListViewItem}">
-                    <Setter Property="Background" Value="Transparent" />
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                <ContentPresenter />
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Setter Property="HorizontalAlignment" Value="Left" />
-                    <Setter Property="Margin" Value="2,0,0,0" />
-                </Style>
-            </ListView.ItemContainerStyle>-->
-            
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="115">
@@ -57,61 +38,24 @@
         </ListView>
 
         <Frame x:Name="frmServer" Grid.Column="1"></Frame>
-        <!--<TabControl Name="tbcServerList" Background="#555346" BorderThickness="0" TabStripPlacement="Left" ItemsSource="{Binding}">
-            <TabControl.Resources>
-                <Style TargetType="TabItem">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="TabItem">
-                                <Border x:Name="Border" CornerRadius="4" Padding="5,0,0,0">
-                                    <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Left" ContentSource="Header" 
-                                                      Height="28" Width="100" Margin="0" />
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsSelected" Value="True">
-                                        <Setter TargetName="Border" Property="Background" Value="#626050" />
-                                    </Trigger>
-                                    <Trigger Property="IsSelected" Value="False">
-                                        <Setter TargetName="Border" Property="Background" Value="#555346" />
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </TabControl.Resources>
 
-            <TabControl.ItemTemplate>
-                <DataTemplate>
-                    <Label Content="{Binding Header}" />
-                </DataTemplate>
-            </TabControl.ItemTemplate>
-            <TabControl.ContentTemplate>
-                <DataTemplate>
-                    <Grid Margin="10,0,0,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="29" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Button x:Name="bttnSettings" Height="29" Width="30" Click="bttnSettings_Click" Style="{StaticResource IconButton}">&#xE115;</Button>
-                        </StackPanel>
-
-                        <Frame Grid.Row="1" Name="frmServer" ></Frame>
-                    </Grid>
-                </DataTemplate>
-            </TabControl.ContentTemplate>
-            
-            
-        </TabControl>-->
-
-        <Button Name="btnAddExisting" Grid.Column="2" Height="40" Width="40" Style="{StaticResource IconButton}" VerticalAlignment="Top" Click="btnAddExisting_Click">
-            &#xE8E5;
-            <Button.ToolTip>
-                <ToolTip Content="Add existing server" />
-            </Button.ToolTip>
-        </Button>
+        <StackPanel Orientation="Vertical" Grid.Column="2">
+            <Button Name="btnAddExisting" Style="{StaticResource IconButton}" Click="btnAddExisting_Click">
+                &#xE8E5;
+                <Button.ToolTip>
+                    <ToolTip Content="Add existing server" />
+                </Button.ToolTip>
+            </Button>
+            <Button x:Name="btnAddNew" Style="{StaticResource IconButton}" Click="btnAddNew_Click">
+                &#xE109;
+                <Button.ToolTip>
+                    <ToolTip Content="Add new server" />
+                </Button.ToolTip>
+            </Button>
+            <Button x:Name="btnHelp" Style="{StaticResource IconButton}" Visibility="Hidden">
+                &#xE11b;
+            </Button>
+        </StackPanel>
 
     </Grid>
 </Page>

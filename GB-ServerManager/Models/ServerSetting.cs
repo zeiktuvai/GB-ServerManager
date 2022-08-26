@@ -13,6 +13,7 @@ namespace GB_ServerManager.Models
         public string ServerPath { get; set; }
         public string ServerMOTD { get; set; }
         public string ServerPassword { get; set; }
+        public string SpectatorOnlyPassword { get; set; }
         public string MultiHome { get; set; }
         public int Port { get; set; }
         public int QueryPort { get; set; }
