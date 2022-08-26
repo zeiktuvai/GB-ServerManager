@@ -15,13 +15,13 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_AC6D2D355AF0407DB9D7444D2BF24FD6"
+        "MsmKey" = "8:_7467BC542F2444B4A1A74FC7D811AF5F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_B1983D09F9264408849255EFD64A0599"
+        "MsmKey" = "8:_AC6D2D355AF0407DB9D7444D2BF24FD6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -114,10 +114,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B1983D09F9264408849255EFD64A0599"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7467BC542F2444B4A1A74FC7D811AF5F"
             {
-            "SourcePath" = "8:..\\GB-ServerManager\\Assets\\GB-logo-white.ico"
-            "TargetName" = "8:GB-logo-white.ico"
+            "SourcePath" = "8:..\\GB-ServerManager\\Assets\\app_icon.ico"
+            "TargetName" = "8:app_icon.ico"
             "Tag" = "8:"
             "Folder" = "8:_F3DC780EFCB74CA3BD3A0805AE9EC379"
             "Condition" = "8:"
@@ -201,15 +201,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:GB-ServerManager"
-        "ProductCode" = "8:{51E4AAE0-2265-40F9-BF1B-74D7C0AC60E2}"
-        "PackageCode" = "8:{1EA815F7-8A5E-42A4-92B9-F0F01BB49123}"
+        "ProductCode" = "8:{AEF6D664-1B38-486D-9E72-5A8C6249A9AC}"
+        "PackageCode" = "8:{2ECB4EF6-23F7-42F6-AC43-86C4703B9231}"
         "UpgradeCode" = "8:{2E1C4F8C-6C60-42B6-8E57-190F42F97390}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:0.5.66"
+        "ProductVersion" = "8:0.5.67"
         "Manufacturer" = "8:ICOMNetworks Consulting"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -333,7 +333,7 @@
             "Target" = "8:_AC6D2D355AF0407DB9D7444D2BF24FD6"
             "Folder" = "8:_ED45BD27B88545D7821DAE220A52BC43"
             "WorkingFolder" = "8:_F3DC780EFCB74CA3BD3A0805AE9EC379"
-            "Icon" = "8:_B1983D09F9264408849255EFD64A0599"
+            "Icon" = "8:_7467BC542F2444B4A1A74FC7D811AF5F"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_AE33D1DD64234C9DBC249BCCCA0F1FAE"
@@ -347,7 +347,7 @@
             "Target" = "8:_AC6D2D355AF0407DB9D7444D2BF24FD6"
             "Folder" = "8:_BD608E940E6D428F92E44BED584E10A1"
             "WorkingFolder" = "8:_F3DC780EFCB74CA3BD3A0805AE9EC379"
-            "Icon" = "8:_B1983D09F9264408849255EFD64A0599"
+            "Icon" = "8:_7467BC542F2444B4A1A74FC7D811AF5F"
             "Feature" = "8:"
             }
         }
