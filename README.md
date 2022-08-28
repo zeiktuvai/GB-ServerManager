@@ -12,7 +12,8 @@ Technical Note: It is recommended to run this application as administrator, howe
 - Add existing installed servers to manage
 - Set launch options for the server
 - Run and open the log window right from the app
-- A timer runs that will check player counts and if the server is up every 5 minutes (May make this a setting that can be changed later)
+- The app will check to see if the servers are running every 5 minutes, and update the status of the running servers in the UI every 30 seconds.
+- Can download and extract steamCMD for you.
 - More to come..
 
 ### In Development
