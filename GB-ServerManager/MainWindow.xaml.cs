@@ -99,8 +99,8 @@ namespace GB_ServerManager
 
             if (runningServers.Count > 0)
             {
-                var test = MessageBox.Show("There are running servers, Are you sure you wish to quit and close the servers?", "Really quit bro?", MessageBoxButton.YesNo);
-                if (test == MessageBoxResult.Yes)
+                var result = MessageBox.Show("There are running servers, Do you wish to close the servers when exiting this application?", "Really quit bro?", MessageBoxButton.YesNoCancel);
+                if (result == MessageBoxResult.Yes)
                 {
                     bool allKilled = false;
 
@@ -118,6 +118,11 @@ namespace GB_ServerManager
                         MessageBox.Show("Failed to stop all servers, you will have to manually terminate server processes.");
                         Close();
                     }
+                }
+
+                if (result == MessageBoxResult.No)
+                {
+                    Close();
                 }
             }
             else

@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:GB_ServerManager.Windows"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="AddNewGBServer" Height="450" Width="800"
-        WindowStyle="None" Background="#555346">
+        Title="AddNewGBServer" Height="400" Width="700"
+        WindowStyle="None" ResizeMode="NoResize" BorderThickness=".5" BorderBrush="Black" Background="#555346">
     <Window.Resources>
         <Style x:Key="EntryLabel" TargetType="Label">
             <Setter Property="HorizontalAlignment" Value="Right" />
@@ -34,6 +34,7 @@
             <Setter Property="Margin" Value="0,5,0,0" />
             <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="Background" Value="Transparent" />
+            <Setter Property="TextAlignment" Value="Left" />
         </Style>
     </Window.Resources>
     
@@ -62,10 +63,13 @@
             <Label Content="Query Port:" Style="{StaticResource EntryLabel}" />
             <Label Content="Restart Time:" Style="{StaticResource EntryLabel}" />
         </StackPanel>
+        
         <StackPanel VerticalAlignment="Bottom" Grid.Row="1">
             <Button x:Name="btnTest" Content="Press me" Click="btnTest_Click"/>
+            <Button x:Name="btnAdd" Content="Add Server" Click="btnAdd_Click" />
             <Button x:Name="btnClose" Content="Cancel" Click="btnClose_Click"/>            
         </StackPanel>
+        
         <StackPanel Grid.Row="1" Grid.Column="1">
             <TextBox x:Name="tbxServerName" Style="{StaticResource EntryBox}" />
             <Border Height="2" Width="400" HorizontalAlignment="Left" Background="#464855" CornerRadius="5" />
@@ -82,26 +86,17 @@
                 <Label Content="(Or blank for no pass)" />
             </StackPanel>
             <Border Height="2" Width="200" HorizontalAlignment="Left" Background="#464855" CornerRadius="5" />
-            <xctk:IntegerUpDown x:Name="tbxMaxPlayer" Maximum="16" Minimum="1" Style="{StaticResource EntryNumber}" />
+            <xctk:IntegerUpDown x:Name="tbxMaxPlayer" Maximum="16" Minimum="1" Value="16" Style="{StaticResource EntryNumber}" />
             <Border Height="2" Width="50" HorizontalAlignment="Left" Background="#464855" CornerRadius="5" />
-            <xctk:IntegerUpDown x:Name="tbxMaxSpectator" Maximum="16" Minimum="0" Style="{StaticResource EntryNumber}" />
+            <xctk:IntegerUpDown x:Name="tbxMaxSpectator" Maximum="16" Minimum="0" Value="0" Style="{StaticResource EntryNumber}" />
             <Border Height="2" Width="50" HorizontalAlignment="Left" Background="#464855" CornerRadius="5" />
-            <StackPanel Orientation="Horizontal">
-                <TextBox x:Name="tbxMultiHome" Style="{StaticResource EntryTinyBox}" />
-                <Label Content="(Default: 0.0.0.0; or the ip of your server)" />
-            </StackPanel>
+            <TextBox x:Name="tbxMultiHome" Text="0.0.0.0" Style="{StaticResource EntryTinyBox}" />
             <Border Height="2" Width="100" HorizontalAlignment="Left" Background="#464855" CornerRadius="5" />
-            <StackPanel Orientation="Horizontal">
-                <TextBox x:Name="tbxPort" Style="{StaticResource EntryTinyBox}" />
-                <Label Content="(Default: 7777; Must be different from other servers on this host)" />
-            </StackPanel>
+            <TextBox x:Name="tbxPort" Style="{StaticResource EntryTinyBox}" />
             <Border Height="2" Width="100" HorizontalAlignment="Left" Background="#464855" CornerRadius="5" />
-            <StackPanel Orientation="Horizontal">
-                <TextBox x:Name="tbxQueryPort" Style="{StaticResource EntryTinyBox}" />
-                <Label Content="(Default: 27015; Must be different from other servers on this host)" />
-            </StackPanel>
+            <TextBox x:Name="tbxQueryPort" Style="{StaticResource EntryTinyBox}" />
             <Border Height="2" Width="100" HorizontalAlignment="Left" Background="#464855" CornerRadius="5" />
-            <xctk:IntegerUpDown x:Name="tbxRestartTime" Maximum="24" Minimum="1" Style="{StaticResource EntryNumber}" />
+            <xctk:IntegerUpDown x:Name="tbxRestartTime" Maximum="24" Minimum="1" Value="12" Style="{StaticResource EntryNumber}" />
             <Border Height="2" Width="50" HorizontalAlignment="Left" Background="#464855" CornerRadius="5" />
         </StackPanel>
     </Grid>

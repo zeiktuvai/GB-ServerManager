@@ -1,18 +1,8 @@
 ﻿using GB_ServerManager.Helpers;
 using GB_ServerManager.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GB_ServerManager.Services;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System;
 
 namespace GB_ServerManager.Windows
 {
@@ -21,10 +11,17 @@ namespace GB_ServerManager.Windows
     /// </summary>
     public partial class AddNewGBServer : Window
     {
-        private const string GBServerAppID = "476400";
+        private const string GBServerAppID = "476400";        
         public AddNewGBServer()
         {
             InitializeComponent();
+
+            if (ServerCache._ServerList.Servers != null)
+            {
+                var ports = FindPorts();
+                tbxPort.Text = ports.Item1.ToString();
+                tbxQueryPort.Text = ports.Item2.ToString();
+            }
         }
 
         private void btnTest_Click(object sender, RoutedEventArgs e)
@@ -52,6 +49,55 @@ namespace GB_ServerManager.Windows
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            ServerSetting addServer = new ServerSetting();
+
+
+
+        }
+
+        private Tuple<int, int> FindPorts()
+        {
+            bool portFound = false;
+            int port = 7777;
+            int queryPort = 27015;
+            
+
+            while (portFound == false)
+            {
+                var search =  ServerCache._ServerList.Servers.Find(s => s.Port == port);
+
+                if (search != null)
+                {
+                    port++;
+                }
+                else
+                {
+                    portFound = true;
+                }
+            }
+
+            portFound = false;
+            while (portFound == false)
+            {
+                var search = ServerCache._ServerList.Servers.Find(s => s.QueryPort == queryPort);
+
+                if (search != null)
+                {
+                    queryPort++;
+                }
+                else
+                {
+                    portFound = true;
+                }
+            }
+
+
+            Tuple<int, int> ports = new Tuple<int, int>(port, queryPort);
+            return ports;
         }
     }
 }
