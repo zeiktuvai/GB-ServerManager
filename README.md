@@ -18,8 +18,7 @@ Technical Note: It is recommended to run this application as administrator, howe
 
 ### In Development
 - Ability to download and create servers right from the app
-- Server PID persistance (So you can close the application to update it without closing the servers).
-- Instituing a separate timer for each server so that if it dies in that 5 minute window you don't have to wait for the next tick for it to come back up. (Or reduce the tick on the main timer to check every 30sec to so many minutes).
+- Server PID persistance (So you can close the application to update it without closing the servers)
 - Ability to edit ini files
 - Ability to delete servers (including their files)
 - E-mail server status notifications
