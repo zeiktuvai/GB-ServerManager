@@ -8,11 +8,11 @@
     <UseWPF>true</UseWPF>
 	  <Version>0.5.67</Version>
 	  <FileVersion>0.5.67</FileVersion>
-	  <ApplicationIcon>Assets\app_icon.ico</ApplicationIcon>
+	  <ApplicationIcon>Assets\app_image.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Assets\app_icon.ico" />
+    <Content Include="Assets\app_image.ico" />
   </ItemGroup>
 
   <ItemGroup>

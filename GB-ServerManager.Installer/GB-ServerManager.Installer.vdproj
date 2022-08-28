@@ -15,7 +15,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_7467BC542F2444B4A1A74FC7D811AF5F"
+        "MsmKey" = "8:_8A7797A1E8EE4F8A943E15503817BFDE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -50,6 +50,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -114,10 +122,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7467BC542F2444B4A1A74FC7D811AF5F"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8A7797A1E8EE4F8A943E15503817BFDE"
             {
-            "SourcePath" = "8:..\\GB-ServerManager\\Assets\\app_icon.ico"
-            "TargetName" = "8:app_icon.ico"
+            "SourcePath" = "8:..\\GB-ServerManager\\Assets\\app_image.ico"
+            "TargetName" = "8:app_image.ico"
             "Tag" = "8:"
             "Folder" = "8:_F3DC780EFCB74CA3BD3A0805AE9EC379"
             "Condition" = "8:"
@@ -333,7 +341,7 @@
             "Target" = "8:_AC6D2D355AF0407DB9D7444D2BF24FD6"
             "Folder" = "8:_ED45BD27B88545D7821DAE220A52BC43"
             "WorkingFolder" = "8:_F3DC780EFCB74CA3BD3A0805AE9EC379"
-            "Icon" = "8:_7467BC542F2444B4A1A74FC7D811AF5F"
+            "Icon" = "8:_8A7797A1E8EE4F8A943E15503817BFDE"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_AE33D1DD64234C9DBC249BCCCA0F1FAE"
@@ -347,7 +355,7 @@
             "Target" = "8:_AC6D2D355AF0407DB9D7444D2BF24FD6"
             "Folder" = "8:_BD608E940E6D428F92E44BED584E10A1"
             "WorkingFolder" = "8:_F3DC780EFCB74CA3BD3A0805AE9EC379"
-            "Icon" = "8:_7467BC542F2444B4A1A74FC7D811AF5F"
+            "Icon" = "8:_8A7797A1E8EE4F8A943E15503817BFDE"
             "Feature" = "8:"
             }
         }
