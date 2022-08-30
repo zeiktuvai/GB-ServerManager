@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Xceed.Wpf.Toolkit;
 
@@ -95,6 +96,33 @@ namespace GB_ServerManager.Helpers
             else
             {
                 return false;
+            }
+        }
+
+        public static bool InitialServerStart(ServerSetting server)
+        {
+            try
+            {
+                var proc = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = server.ServerPath,
+                        Arguments = String.Format("Multihome={0} Port={1} QueryPort={2} ScheduledShutdownTime={3} -LOCALLOGTIMES", server.MultiHome, server.Port, server.QueryPort, server.RestartTime)                    
+                    }
+
+                };
+                var process = proc.Start();
+
+                Thread.Sleep(10000);
+
+                proc.Kill();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;                
             }
         }
     }

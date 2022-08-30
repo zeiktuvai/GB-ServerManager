@@ -3,11 +3,12 @@ using System.Text.RegularExpressions;
 using GB_ServerManager.Models;
 using System;
 using System.Text;
+using System.Security.Cryptography;
 
 namespace GB_ServerManager.Helpers
 {
     internal static class GBServerHelper
-    {
+    {        
         internal static ServerSetting RetrieveGBServerProperties(string BasePath, string ServerExePath)
         {
             string ServerIniPath = "";
@@ -46,6 +47,24 @@ namespace GB_ServerManager.Helpers
 
             return NewServer;
         }  
+
+        internal static ServerSetting RetrieveGBServerProperties(ServerSetting server)
+        {
+            var updateServer = server;
+            updateServer.Header = server.ServerName.Length < 15 ? server.ServerName.Substring(0, server.ServerName.Length) : server.ServerName.Substring(0, 15);
+
+            if (File.Exists(Path.Combine(server.ServerBasePath + "\\GroundBranch\\Binaries\\Win64\\GroundBranchServer-Win64-Shipping.exe")))
+            {
+                updateServer.ServerPath = Path.Combine(server.ServerBasePath + "\\GroundBranch\\Binaries\\Win64\\GroundBranchServer-Win64-Shipping.exe");
+            }
+            else
+            {
+                throw new FileNotFoundException();
+            }
+
+            return updateServer;
+
+        }
         
         internal static string GetNewGBServerDirectory()
         {
@@ -80,13 +99,11 @@ namespace GB_ServerManager.Helpers
                             if (!Directory.Exists(path))
                             {
                                 emptyDirFound = true;
-                                Directory.CreateDirectory(path);
                             }
                         }
                         else
                         {
                             emptyDirFound = true;
-                            Directory.CreateDirectory(path);
                         }
 
                     }
