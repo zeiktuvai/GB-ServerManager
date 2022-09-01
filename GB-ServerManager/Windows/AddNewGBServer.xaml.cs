@@ -66,7 +66,7 @@ namespace GB_ServerManager.Windows
                     SpectatorOnlyPassword = tbxSpectatorPass.Text
                 };
 
-                int proc = SteamCMDHelper.DownloadNewServer(addServer);
+                int proc = SteamCMDHelper.DownloadUpdateNewServer(addServer);
 
                 while (Process.GetProcessById(proc).HasExited == false)
                 {

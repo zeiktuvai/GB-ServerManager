@@ -95,6 +95,14 @@ namespace GB_ServerManager.Views
             var server = ((sender as Button).DataContext as ServerSetting);
             if (server._ServerPID == 0 || (server._ServerPID != 0 && !ProcessHelper.GetServerStatus(server._ServerPID))) 
             {
+                if (!string.IsNullOrWhiteSpace(AppSettingsHelper.ReadSettings().SteamCMDPath))
+                {
+                    var proc = SteamCMDHelper.DownloadUpdateNewServer(server);
+                    while (Process.GetProcessById(proc).HasExited != true)
+                    {
+                        Thread.Sleep(5000);
+                    }
+                }
                 ProcessHelper.StartServer(server);
                 lvServers.ItemsSource = null;
                 lvServers.ItemsSource = UpdateServerStatus(ServerCache._ServerList, true);                

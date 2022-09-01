@@ -12,7 +12,7 @@ namespace GB_ServerManager.Helpers
 {
     internal static class SteamCMDHelper
     {
-        internal static int DownloadNewServer(ServerSetting server)
+        internal static int DownloadUpdateNewServer(ServerSetting server)
         {
             if (!string.IsNullOrWhiteSpace(server.ServerBasePath))
             {
@@ -35,12 +35,6 @@ namespace GB_ServerManager.Helpers
             }
 
             return 0;
-        }
-
-        internal static void UpdateExistingServer(ServerSetting server)
-        {
-            //TODO: Updates
-            throw new NotImplementedException();
         }
     }
 }
