@@ -16,7 +16,7 @@ namespace GB_ServerManager.Views
     /// </summary>
     public partial class Settings : Page
     {
-        private static string _LocalAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\GB_ServerManager";
+        private static string _LocalAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\GB-ServerManager";
         
         public Settings()
         {
@@ -117,6 +117,10 @@ namespace GB_ServerManager.Views
             {
                 try
                 {
+                    if (!Directory.Exists(_LocalAppDataPath))
+                    {
+                        Directory.CreateDirectory(_LocalAppDataPath);
+                    }
                     using (var client = new WebClient())
                     {
                         client.DownloadFile("https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip", _LocalAppDataPath + "\\steamcmd.zip");

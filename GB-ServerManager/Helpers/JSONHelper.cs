@@ -9,7 +9,7 @@ namespace GB_ServerManager.Helpers
     internal static class JSONHelper
     {
         private const string _FileName = "ServerList.JSON";
-        private static string _LocalAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\GB_ServerManager";
+        private static string _LocalAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\GB-ServerManager";
         internal static bool SaveServerToFile(ServerList Servers)
         {
             string path = Path.Combine(_LocalAppDataPath, _FileName);

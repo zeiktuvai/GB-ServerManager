@@ -47,6 +47,13 @@ namespace GB_ServerManager.Services
 
             return null;            
         }
+
+        public static bool AddGBServer(ServerSetting server)
+        {
+            ServerCache._ServerList.Servers.Add(server);
+            JSONHelper.SaveServerToFile(ServerCache._ServerList);
+            return true;
+        }
         
         public static void UpdateGBServer(ServerSetting server)
         {

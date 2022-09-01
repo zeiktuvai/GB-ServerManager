@@ -4,17 +4,58 @@ using GB_ServerManager.Models;
 using System;
 using System.Text;
 using System.Security.Cryptography;
+using GB_ServerManager.Services;
 
 namespace GB_ServerManager.Helpers
 {
     internal static class GBServerHelper
     {        
+        internal static ServerSetting FindGBServerExecutable(string FileName)
+        {
+            ServerSetting paths = new ServerSetting();
+            string GBFolderName = "GroundBranch";
+
+            try
+            {
+                string DirPath = Path.GetDirectoryName(FileName);
+
+                if (FileName.Contains("GroundBranchServer-Win64-Shipping.exe"))
+                {
+                    string path = Path.GetDirectoryName(FileName);
+                    paths.ServerBasePath = path.Substring(0, path.IndexOf(GBFolderName));
+                    paths.ServerPath = FileName;
+                }
+
+                if (FileName.Contains("GroundBranchServer.exe"))
+                {
+                    paths.ServerBasePath = Path.GetDirectoryName(FileName);
+                    var exeFiles = Directory.GetFiles(paths.ServerBasePath, "*.exe", SearchOption.AllDirectories);
+                    foreach (var item in exeFiles)
+                    {
+                        if (item.Contains("GroundBranchServer-Win64-Shipping.exe"))
+                        {
+                            paths.ServerPath = item;
+                        }
+                    }
+                }
+
+                return paths;
+            }
+            catch (System.Exception)
+            {
+                throw new FileNotFoundException();
+            }
+        }
+
         internal static ServerSetting RetrieveGBServerProperties(string BasePath, string ServerExePath)
         {
             string ServerIniPath = "";
             ServerSetting NewServer = new ServerSetting();
 
             NewServer.ServerId = Guid.NewGuid();
+            NewServer.ServerBasePath = BasePath;
+            NewServer.ServerPath = ServerExePath;
+            NewServer.RestartTime = 24;
 
             try
             {
@@ -38,13 +79,7 @@ namespace GB_ServerManager.Helpers
                 throw;
             }
 
-           
-
-            NewServer.ServerBasePath = BasePath;
-            NewServer.ServerPath = ServerExePath;
             NewServer.Header = NewServer.ServerName.Substring(0, 15);
-            NewServer.RestartTime = 24;
-
             return NewServer;
         }  
 

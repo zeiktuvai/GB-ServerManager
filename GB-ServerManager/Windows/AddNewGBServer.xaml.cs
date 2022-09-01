@@ -43,13 +43,6 @@ namespace GB_ServerManager.Windows
             this.Close();
         }
 
-        //XXOpen a new window to get information or something
-        //XXCall to get directory
-        //XXrun steamcmd process to download
-        //XXprobably create a server INI
-        //Extract "Add Existing Server" to GBServerHelper
-        //use add server stuff to import the server dir into servercache including ports and stuff
-        //refresh server list
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(AppSettingsHelper.ReadSettings().ServerBasePath))
@@ -94,8 +87,10 @@ namespace GB_ServerManager.Windows
                     GBServerHelper.CreateServerINIFile(addServer);
                 }
 
+                ServerService.AddGBServer(addServer);
 
-                
+                this.DialogResult = true;                
+                this.Close();
             }
             else
             {
