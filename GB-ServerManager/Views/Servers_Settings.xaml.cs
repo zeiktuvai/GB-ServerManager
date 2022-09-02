@@ -28,13 +28,12 @@ namespace GB_ServerManager.Views
         }
         private void btnSaveServer_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            //TODO: update this so that it saves the new fields AND outputs to INI file.
             var server = (ServerSetting)this.DataContext;
             bool _validConfig = false;
             int _srvrPort = 0;
             int _queryPort = 0;
 
-            //server.ServerPath = tbxSrvrPath.Text;
-            //server.ServerName = 
             
             if (!string.IsNullOrEmpty(tbxSrvrMulHome.Text))
             {
@@ -78,8 +77,6 @@ namespace GB_ServerManager.Views
                 MessageBox.Show("Error setting Restart Time; Please make sure the restart time is between 1 and 24", "Restart Time Error", System.Windows.MessageBoxButton.OK);
                 _validConfig = false;
             }
-
-            server.LaunchSeperateLogWindow = cbxOpenLogWindow.IsChecked ?? false;
 
             if (_validConfig == true)
             {
