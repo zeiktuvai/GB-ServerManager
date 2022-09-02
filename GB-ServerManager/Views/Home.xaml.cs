@@ -122,10 +122,25 @@ namespace GB_ServerManager.Views
 
         private void RunServerListUpdate(object sender, EventArgs e)
         {
+            
             if (ServerCache._ServerList.Servers.FindAll(s => s._ServerPID != 0).Count > 0)
             {
                 lvServers.ItemsSource = null;
                 lvServers.ItemsSource = UpdateServerStatus(ServerCache._ServerList, false);
+            }
+
+            try
+            {
+                foreach(var server in ServerCache._ServerList.Servers)
+                {
+                    ServerService.UpdateGBServer(GBServerHelper.GetServerINIFile(server));
+                }
+                lvServers.ItemsSource = null;
+                lvServers.ItemsSource = UpdateServerStatus(ServerCache._ServerList);
+            }
+            catch (Exception)
+            {
+                                
             }
         }
 

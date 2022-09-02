@@ -27,8 +27,7 @@ namespace GB_ServerManager.Views
 
         }
         private void btnSaveServer_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            //TODO: update this so that it saves the new fields AND outputs to INI file.
+        {            
             var server = (ServerSetting)this.DataContext;
             bool _validConfig = false;
             int _srvrPort = 0;

@@ -170,11 +170,6 @@ namespace GB_ServerManager.Helpers
             File.WriteAllText(INIPath + "\\Server.ini", file.ToString());
         }
 
-        internal static void UpdateServerINIFile(ServerSetting server)
-        {
-         
-        }
-
         internal static ServerSetting GetServerINIFile(ServerSetting server)
         {
             var ServerIniPath = Path.Combine(server.ServerBasePath, "GroundBranch\\ServerConfig\\Server.ini");
