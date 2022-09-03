@@ -15,3 +15,5 @@ Fill out the appropriate fields (Server Name, MOTD, Passwords if needed, etc.) a
 Once you click "Add Server" it will start to download the GB server to the displayed path, run it quickly to create the INI files, update the server.ini with the settings you provided and take you back to the servers page with the new server all ready to use.
 
 > **NOTE**: You will still have to navigate to the servers directory and modify your Maplist.ini and Admins.ini (Or use the AdminSetupPassword.txt and log in to the new server from the game to set your admins and maplist).
+
+If you need assistance with the final setup, please refer to any of the other Dedicated server guides out there that can help you log in and setup your server.
