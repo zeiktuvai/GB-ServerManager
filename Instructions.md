@@ -13,3 +13,5 @@ NOTE: If you are running servers outside of GB Server Manager it will not know a
 ![image](https://user-images.githubusercontent.com/12722354/188250194-0db13d80-c5ad-4f7d-a165-204052e50132.png)
 
 Once you click "Add Server" it will start to download the GB server to the displayed path, run it quickly to create the INI files, update the server.ini with the settings you provided and take you back to the servers page with the new server all ready to use.
+
+NOTE: You will still have to navigate to the servers directory and modify your Maplist.ini and Admins.ini (Or use the AdminSetupPassword.txt and log in to the new server from the game to set your admins and maplist).
