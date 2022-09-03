@@ -46,5 +46,29 @@ namespace GB_ServerManager.Properties {
                 this["BaseSrvrPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DatabaseMigrate {
+            get {
+                return ((bool)(this["DatabaseMigrate"]));
+            }
+            set {
+                this["DatabaseMigrate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SettingsVersion {
+            get {
+                return ((string)(this["SettingsVersion"]));
+            }
+            set {
+                this["SettingsVersion"] = value;
+            }
+        }
     }
 }

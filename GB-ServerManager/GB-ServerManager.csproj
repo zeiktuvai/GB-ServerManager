@@ -6,8 +6,8 @@
     <RootNamespace>GB_ServerManager</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-	  <Version>0.6.0</Version>
-	  <FileVersion>0.6.0</FileVersion>
+	  <Version>0.6.5</Version>
+	  <FileVersion>0.6.5</FileVersion>
 	  <ApplicationIcon>Assets\app_image.ico</ApplicationIcon>
   </PropertyGroup>
 

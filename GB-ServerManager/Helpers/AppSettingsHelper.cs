@@ -1,5 +1,6 @@
 ﻿using GB_ServerManager.Models;
 using System;
+using System.Runtime.ConstrainedExecution;
 
 namespace GB_ServerManager.Helpers
 {
@@ -45,6 +46,39 @@ namespace GB_ServerManager.Helpers
             }
 
             return Settings;            
+        }
+
+        internal static void SetDBMigration()
+        {
+            Properties.Settings.Default.DatabaseMigrate = true;
+            Properties.Settings.Default.Save();
+        }
+
+        internal static bool ReadDBMigration()
+        {
+            return Properties.Settings.Default.DatabaseMigrate;
+        }
+
+        internal static bool NewVersionSettingsMigration()
+        {
+            var ver = typeof(MainWindow).Assembly.GetName().Version;                
+            
+            if (string.IsNullOrWhiteSpace(Properties.Settings.Default.SettingsVersion))
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.SettingsVersion = string.Format("v{0}.{1}.{2}", ver.Major, ver.Minor, ver.Build);
+                Properties.Settings.Default.Save();
+            }
+            else
+            {
+                if (Properties.Settings.Default.SettingsVersion != string.Format("v{0}.{1}.{2}", ver.Major, ver.Minor, ver.Build))
+                {
+                    Properties.Settings.Default.Upgrade();
+                    Properties.Settings.Default.SettingsVersion = string.Format("v{0}.{1}.{2}", ver.Major, ver.Minor, ver.Build);
+                    Properties.Settings.Default.Save();
+                }
+            }
+            return false;
         }
     }
 }

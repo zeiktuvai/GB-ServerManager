@@ -72,7 +72,7 @@
                 </Label>
                 <TextBox x:Name="tbxBaseSrvrPath" HorizontalAlignment="Stretch" Margin="40,0,0,0" />
                 <Button x:Name="bttnOpenServerPath" Grid.Column="1" Width="20" Background="Transparent" BorderBrush="Black" BorderThickness=".5" 
-                            FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" Click="bttnOpenServerPath_Click">&#xE197;</Button>
+                            FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" Click="bttnOpenServerPath_Click" Visibility="Hidden">&#xE197;</Button>
             </Grid>
             <Label Content="(This is where all servers that are downloaded will be installed to)" HorizontalAlignment="Center"/>
         </StackPanel>

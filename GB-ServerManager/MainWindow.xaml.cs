@@ -25,6 +25,13 @@ namespace GB_ServerManager
         {
             InitializeComponent();
 
+            AppSettingsHelper.NewVersionSettingsMigration();
+            
+            if (!AppSettingsHelper.ReadDBMigration())
+            {
+                GBServerHelper.MigrateServerJSON();
+            }
+
             dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
             dispatcherTimer.Tick += new EventHandler(DispatcherHelper.RunServerProcessCheck);
             dispatcherTimer.Start();

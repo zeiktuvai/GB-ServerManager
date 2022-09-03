@@ -225,5 +225,41 @@ namespace GB_ServerManager.Helpers
                 throw new IOException("Failed to read Server.Ini file");
             }
         }
+
+        internal static void MigrateServerJSON()
+        {
+            var _LocalAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var _OldFile = _LocalAppDataPath + "\\GB_ServerManager\\ServerList.JSON";
+            var _NewFile = _LocalAppDataPath + "\\GB-ServerManager\\ServerList.JSON";
+
+            if (Directory.Exists(_LocalAppDataPath + "\\GB_ServerManager"))
+            {                
+                if (File.Exists(_OldFile))
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(_LocalAppDataPath + "\\GB-ServerManager");
+                        File.Move(_OldFile, _NewFile);                            
+                        var files = Directory.GetFiles(_LocalAppDataPath + "\\GB_ServerManager");
+                        foreach (var file in files)
+                        {
+                            File.Delete(file);
+                        }
+                        Directory.Delete(_LocalAppDataPath + "\\GB_ServerManager");
+                    }
+                    catch (Exception)
+                    {                        
+                    }
+                    finally
+                    {
+                        AppSettingsHelper.SetDBMigration();
+                    }
+                }        
+            }
+            else
+            {
+                AppSettingsHelper.SetDBMigration();
+            }
+        }
     }
 }
