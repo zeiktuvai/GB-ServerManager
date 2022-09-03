@@ -10,6 +10,8 @@ Technical Note: It is recommended to run this application as administrator, howe
 
 ### Features
 - Add existing installed servers to manage
+- Create a new server with a few clicks and it will download the Ground Branch server to a new folder and set the Server.Ini with your settings.
+- Checks for updates each time the server is started or restarted (after the timeout).
 - Set launch options for the server
 - Run and open the log window right from the app
 - The app will check to see if the servers are running every 5 minutes, and update the status of the running servers in the UI every 30 seconds.
@@ -17,9 +19,8 @@ Technical Note: It is recommended to run this application as administrator, howe
 - More to come..
 
 ### In Development
-- Ability to download and create servers right from the app
+
 - Server PID persistance (So you can close the application to update it without closing the servers)
-- Ability to edit ini files
 - Ability to delete servers (including their files)
 - E-mail server status notifications
 - Maybe RCON support for managing the server from the app (if implemented by the devs)
