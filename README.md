@@ -27,3 +27,4 @@ Technical Note: It is recommended to run this application as administrator, howe
 - Possibly a discord bot for server status and notifications (would require me to figure out how to host that bot though)
 - And more as it arises..
 
+[Server Creation Instructions](Instructions.md)
