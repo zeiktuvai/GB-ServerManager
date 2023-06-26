@@ -1,6 +1,6 @@
 # Ground Branch Server Manager
 ---
-GB Server Manager was is a WPF desktop app published under the GNU Public License intended as a replacement for the script that currently runs and manages ground branch servers running on Windows server.
+GB Server Manager is a WPF desktop app published under the GNU Public License intended as a replacement for the script that currently runs and manages ground branch servers running on Windows server.
 
 ![image](https://user-images.githubusercontent.com/12722354/186763035-524be1d8-99b8-4412-9d34-c940c3f12dbf.png)
 
